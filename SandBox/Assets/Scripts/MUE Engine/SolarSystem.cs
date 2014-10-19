@@ -30,5 +30,7 @@ public class SolarSystem : MonoBehaviour {
 			if(currentPlanetCounter>avaliablePlanets)
 				currentPlanetCounter = 0;
 		}
+
+		GameObject.FindObjectOfType<PlanetCharacterController> ().planets = (Planet[])GameObject.FindObjectsOfType(typeof(Planet));;
 	}
 }
