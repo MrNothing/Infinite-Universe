@@ -25,7 +25,7 @@ public class PlanetCharacterController : MonoBehaviour {
 	//public Transform water;
 	// Use this for initialization
 	
-	Planet[] planets;
+	public Planet[] planets;
 	AsteroidField[] asteroids;
 	
 	//public Transform water;
