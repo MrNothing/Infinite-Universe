@@ -1,0 +1,376 @@
+fileFormatVersion: 2
+guid: 20ebb659d1db1324aa23be25f49cdca1
+ModelImporter:
+  serializedVersion: 16
+  fileIDToRecycleName:
+    100000: cannonLOW
+    100002: cannonsLOW
+    100004: //RootNode
+    100006: legsRETOPO
+    100008: legsRETOPO003
+    100010: legsRETOPO004
+    100012: legsRETOPO005
+    100014: legsRETOPO006
+    100016: legsRETOPO007
+    100018: legsRETOPO008
+    100020: legsRETOPO009
+    100022: Object
+    100024: Object002
+    100026: stuff2LOW
+    100028: stuff2LOW002
+    100030: stuffLOW
+    400000: cannonLOW
+    400002: cannonsLOW
+    400004: //RootNode
+    400006: legsRETOPO
+    400008: legsRETOPO003
+    400010: legsRETOPO004
+    400012: legsRETOPO005
+    400014: legsRETOPO006
+    400016: legsRETOPO007
+    400018: legsRETOPO008
+    400020: legsRETOPO009
+    400022: Object
+    400024: Object002
+    400026: stuff2LOW
+    400028: stuff2LOW002
+    400030: stuffLOW
+    2300000: cannonLOW
+    2300002: cannonsLOW
+    2300004: //RootNode
+    2300006: legsRETOPO
+    2300008: legsRETOPO003
+    2300010: legsRETOPO004
+    2300012: legsRETOPO005
+    2300014: legsRETOPO006
+    2300016: legsRETOPO007
+    2300018: legsRETOPO008
+    2300020: legsRETOPO009
+    2300022: Object
+    2300024: Object002
+    2300026: stuff2LOW
+    2300028: stuff2LOW002
+    2300030: stuffLOW
+    3300000: cannonLOW
+    3300002: cannonsLOW
+    3300004: //RootNode
+    3300006: legsRETOPO
+    3300008: legsRETOPO003
+    3300010: legsRETOPO004
+    3300012: legsRETOPO005
+    3300014: legsRETOPO006
+    3300016: legsRETOPO007
+    3300018: legsRETOPO008
+    3300020: legsRETOPO009
+    3300022: Object
+    3300024: Object002
+    3300026: stuff2LOW
+    3300028: stuff2LOW002
+    3300030: stuffLOW
+    4300000: shipLOWPOLY
+    4300002: legsRETOPO
+    4300004: cannonsLOW
+    4300006: cannonLOW
+    4300008: stuffLOW
+    4300010: stuff2LOW
+    4300012: legsRETOPO003
+    4300014: legsRETOPO004
+    4300016: legsRETOPO005
+    4300018: legsRETOPO006
+    4300020: legsRETOPO007
+    4300022: legsRETOPO008
+    4300024: stuff2LOW002
+    4300026: legsRETOPO009
+    4300028: Object002
+    4300030: Object
+    7400000: Up
+    7400002: Idle01
+    7400004: Idle02
+    7400006: Land
+    9500000: //RootNode
+  materials:
+    importMaterials: 1
+    materialName: 0
+    materialSearch: 1
+  animations:
+    legacyGenerateAnimations: 4
+    bakeSimulation: 0
+    optimizeGameObjects: 0
+    motionNodeName: 
+    animationCompression: 1
+    animationRotationError: .5
+    animationPositionError: .5
+    animationScaleError: .5
+    animationWrapMode: 0
+    extraExposedTransformPaths: []
+    clipAnimations:
+    - serializedVersion: 16
+      name: Up
+      takeName: Take 001
+      firstFrame: 0
+      lastFrame: 230
+      wrapMode: 0
+      orientationOffsetY: 0
+      level: 0
+      cycleOffset: 0
+      loop: 0
+      loopTime: 0
+      loopBlend: 0
+      loopBlendOrientation: 0
+      loopBlendPositionY: 0
+      loopBlendPositionXZ: 0
+      keepOriginalOrientation: 0
+      keepOriginalPositionY: 1
+      keepOriginalPositionXZ: 0
+      heightFromFeet: 0
+      mirror: 0
+      bodyMask: 01000000010000000100000001000000010000000100000001000000010000000100000001000000010000000100000001000000
+      curves: []
+      events: []
+      transformMask:
+      - path: 
+        weight: 1
+      - path: cannonLOW
+        weight: 1
+      - path: cannonsLOW
+        weight: 1
+      - path: legsRETOPO
+        weight: 1
+      - path: legsRETOPO003
+        weight: 1
+      - path: legsRETOPO004
+        weight: 1
+      - path: legsRETOPO005
+        weight: 1
+      - path: legsRETOPO006
+        weight: 1
+      - path: legsRETOPO007
+        weight: 1
+      - path: legsRETOPO008
+        weight: 1
+      - path: legsRETOPO009
+        weight: 1
+      - path: Object
+        weight: 1
+      - path: Object002
+        weight: 1
+      - path: stuff2LOW
+        weight: 1
+      - path: stuff2LOW002
+        weight: 1
+      - path: stuffLOW
+        weight: 1
+      maskType: 0
+      maskSource: {instanceID: 0}
+    - serializedVersion: 16
+      name: Idle01
+      takeName: Take 001
+      firstFrame: 230
+      lastFrame: 405
+      wrapMode: 0
+      orientationOffsetY: 0
+      level: 0
+      cycleOffset: 0
+      loop: 0
+      loopTime: 1
+      loopBlend: 1
+      loopBlendOrientation: 0
+      loopBlendPositionY: 0
+      loopBlendPositionXZ: 0
+      keepOriginalOrientation: 0
+      keepOriginalPositionY: 1
+      keepOriginalPositionXZ: 0
+      heightFromFeet: 0
+      mirror: 0
+      bodyMask: 01000000010000000100000001000000010000000100000001000000010000000100000001000000010000000100000001000000
+      curves: []
+      events: []
+      transformMask:
+      - path: 
+        weight: 1
+      - path: cannonLOW
+        weight: 1
+      - path: cannonsLOW
+        weight: 1
+      - path: legsRETOPO
+        weight: 1
+      - path: legsRETOPO003
+        weight: 1
+      - path: legsRETOPO004
+        weight: 1
+      - path: legsRETOPO005
+        weight: 1
+      - path: legsRETOPO006
+        weight: 1
+      - path: legsRETOPO007
+        weight: 1
+      - path: legsRETOPO008
+        weight: 1
+      - path: legsRETOPO009
+        weight: 1
+      - path: Object
+        weight: 1
+      - path: Object002
+        weight: 1
+      - path: stuff2LOW
+        weight: 1
+      - path: stuff2LOW002
+        weight: 1
+      - path: stuffLOW
+        weight: 1
+      maskType: 0
+      maskSource: {instanceID: 0}
+    - serializedVersion: 16
+      name: Idle02
+      takeName: Take 001
+      firstFrame: 700
+      lastFrame: 799
+      wrapMode: 0
+      orientationOffsetY: 0
+      level: 0
+      cycleOffset: 0
+      loop: 0
+      loopTime: 1
+      loopBlend: 1
+      loopBlendOrientation: 0
+      loopBlendPositionY: 0
+      loopBlendPositionXZ: 0
+      keepOriginalOrientation: 0
+      keepOriginalPositionY: 0
+      keepOriginalPositionXZ: 0
+      heightFromFeet: 0
+      mirror: 0
+      bodyMask: 01000000010000000100000001000000010000000100000001000000010000000100000001000000010000000100000001000000
+      curves: []
+      events: []
+      transformMask:
+      - path: 
+        weight: 1
+      - path: cannonLOW
+        weight: 1
+      - path: cannonsLOW
+        weight: 1
+      - path: legsRETOPO
+        weight: 1
+      - path: legsRETOPO003
+        weight: 1
+      - path: legsRETOPO004
+        weight: 1
+      - path: legsRETOPO005
+        weight: 1
+      - path: legsRETOPO006
+        weight: 1
+      - path: legsRETOPO007
+        weight: 1
+      - path: legsRETOPO008
+        weight: 1
+      - path: legsRETOPO009
+        weight: 1
+      - path: Object
+        weight: 1
+      - path: Object002
+        weight: 1
+      - path: stuff2LOW
+        weight: 1
+      - path: stuff2LOW002
+        weight: 1
+      - path: stuffLOW
+        weight: 1
+      maskType: 0
+      maskSource: {instanceID: 0}
+    - serializedVersion: 16
+      name: Land
+      takeName: Take 001
+      firstFrame: 405
+      lastFrame: 650
+      wrapMode: 0
+      orientationOffsetY: 0
+      level: 0
+      cycleOffset: 0
+      loop: 0
+      loopTime: 0
+      loopBlend: 0
+      loopBlendOrientation: 0
+      loopBlendPositionY: 0
+      loopBlendPositionXZ: 0
+      keepOriginalOrientation: 0
+      keepOriginalPositionY: 1
+      keepOriginalPositionXZ: 0
+      heightFromFeet: 0
+      mirror: 0
+      bodyMask: 01000000010000000100000001000000010000000100000001000000010000000100000001000000010000000100000001000000
+      curves: []
+      events: []
+      transformMask:
+      - path: 
+        weight: 1
+      - path: cannonLOW
+        weight: 1
+      - path: cannonsLOW
+        weight: 1
+      - path: legsRETOPO
+        weight: 1
+      - path: legsRETOPO003
+        weight: 1
+      - path: legsRETOPO004
+        weight: 1
+      - path: legsRETOPO005
+        weight: 1
+      - path: legsRETOPO006
+        weight: 1
+      - path: legsRETOPO007
+        weight: 1
+      - path: legsRETOPO008
+        weight: 1
+      - path: legsRETOPO009
+        weight: 1
+      - path: Object
+        weight: 1
+      - path: Object002
+        weight: 1
+      - path: stuff2LOW
+        weight: 1
+      - path: stuff2LOW002
+        weight: 1
+      - path: stuffLOW
+        weight: 1
+      maskType: 0
+      maskSource: {instanceID: 0}
+    isReadable: 1
+  meshes:
+    lODScreenPercentages: []
+    globalScale: .0299999993
+    meshCompression: 0
+    addColliders: 0
+    importBlendShapes: 1
+    swapUVChannels: 0
+    generateSecondaryUV: 0
+    useFileUnits: 1
+    optimizeMeshForGPU: 1
+    weldVertices: 1
+    secondaryUVAngleDistortion: 8
+    secondaryUVAreaDistortion: 15.000001
+    secondaryUVHardAngle: 88
+    secondaryUVPackMargin: 4
+  tangentSpace:
+    normalSmoothAngle: 60
+    splitTangentsAcrossUV: 1
+    normalImportMode: 0
+    tangentImportMode: 1
+  importAnimation: 1
+  copyAvatar: 0
+  humanDescription:
+    human: []
+    skeleton: []
+    armTwist: .5
+    foreArmTwist: .5
+    upperLegTwist: .5
+    legTwist: .5
+    armStretch: .0500000007
+    legStretch: .0500000007
+    feetSpacing: 0
+    rootMotionBoneName: 
+  lastHumanDescriptionAvatarSource: {instanceID: 0}
+  animationType: 2
+  additionalBone: 0
+  userData: 

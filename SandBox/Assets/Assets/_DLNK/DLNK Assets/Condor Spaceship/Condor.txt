@@ -1,0 +1,44 @@
+Thanks for your purchase.
+
+This package contains a spaceship with basic animations ready to play with. Also you can find many different color versions. Has moving parts.
+
+[Condor Spaceship Webplayer] (50 MB)
+
+The Package contains the following: 
+
+[Model]
+8k Triangles
+4,8k Polygons
+Animated mesh, works with both Mecanim Generic & Legacy
+
+[Textures/Mats]
+Next Gen material:
+11x Color maps
+11x Specular maps (included as Aplha channel in the Color maps)
++ Emissive maps
++ Normal map
++ Displace map (for DX11 Tesellation shaders)
+
+Parts: Color map + Normal map
+
+
+[ 4 Animations]
+All animations are mecanim ready and compatible Legacy.
+
+Fly Stand
+Fly Around
+Landing
+Take off
+
+[DemoScene]
+The asset includes a demoscene (the one you can see on the demo).
+
+I will update with more content as I find time to. 
+If you have comments or question you got my mail here: daelon@gmail.com 
+Please rate and comment so I can keep doing good stuff! 
+
+
+I hope you enjoy it.
+
+Facebook page
+DLNK Artworks
