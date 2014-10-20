@@ -193,7 +193,20 @@ public class PlanetCharacterController : MonoBehaviour {
 			RenderSettings.fogDensity = 0.01f * (1 - bestRatio);
 			if(RenderSettings.fogDensity>0.02f)
 				RenderSettings.fogDensity=0.02f;
-			Color colo = PlanetCharacterController.currentPlanet.getAtmosphereColor (transform.position);
+
+			Color atmosphereColor;
+			
+			try
+			{
+				atmosphereColor = PlanetCharacterController.currentPlanet.skyDome.renderer.material.GetColor("_Color");
+				atmosphereColor.a = 1;
+			}
+			catch
+			{
+				atmosphereColor = new Color(1,1,1,1);
+			}
+
+			Color colo = PlanetCharacterController.currentPlanet.getAtmosphereColor (transform.position)*atmosphereColor;
 			if(colo.r>1)
 				colo.r = 1;
 			if(colo.g>1)

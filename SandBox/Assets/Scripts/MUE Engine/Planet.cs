@@ -103,6 +103,33 @@ public class Planet : MonoBehaviour {
 		perlin = new SimplexNoiseGenerator("azedaz");
 		
 		lastTestPos =transform.position;
+
+		try
+		{
+			Color skyColor = skyDome.renderer.material.GetColor("_Color");
+			if(skyColor.r+skyColor.g+skyColor.b>=3)
+			{
+				skyColor.r = 0;
+				skyColor.g = 0.5f;
+				skyColor.b = 1;
+				skyColor.a = 0.35f;
+			}
+			else
+			{
+				if(skyColor.r+skyColor.g+skyColor.b<=1.5f)
+				{
+					skyColor.r*=1.5f;
+					skyColor.g*=1.5f;
+					skyColor.b*=1.5f;
+				}
+				skyColor.a = 0.35f;
+			}
+			sea.renderer.material.SetColor("_Tint", skyColor);
+		}
+		catch
+		{
+				
+		}
 	}
 
 	public bool isIsland = false;
@@ -122,8 +149,7 @@ public class Planet : MonoBehaviour {
 	public GameObject skyDome;
 	public MeshFilter clouds;
 	public MeshFilter sea;
-	public Material waterMat;
-	
+
 	public bool enableSea = false;
 	
 	bool enableBlocs=false;
@@ -136,7 +162,7 @@ public class Planet : MonoBehaviour {
 	// Update is called once per frame
 	void Update () 
 	{
-		waterMat.SetVector("_LightDir", (sun.transform.position-transform.position).normalized);
+		sea.renderer.material.SetVector("_LightDir", (sun.transform.position-transform.position).normalized);
 		try
 		{
 			Vector3 point;

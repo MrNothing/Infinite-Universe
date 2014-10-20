@@ -472,7 +472,10 @@ public class MeshLodTris : MonoBehaviour {
 			MeshRenderer myWaterRenderer = water.AddComponent<MeshRenderer> ();
 
 			if (!isIsland) 
-				myWaterRenderer.material = planet.waterMat;
+			{
+				renderer.material.SetTextureScale ("_Foam", new Vector2 (80 * level * level, 80 * level * level));
+				myWaterRenderer.material = planet.sea.renderer.material;
+			}
 			else
 				myWaterRenderer.material = Islands.waterMat;
 				

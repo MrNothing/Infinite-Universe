@@ -1,21 +1,8 @@
 ﻿<Properties>
-  <MonoDevelop.Ide.Workspace ActiveConfiguration="Debug" PreferredExecutionTarget="MonoDevelop.Default" />
-  <MonoDevelop.Ide.Workbench ActiveDocument="Assets\Assets\Shaders\AthmosphereScript.cs">
+  <MonoDevelop.Ide.Workspace />
+  <MonoDevelop.Ide.Workbench ActiveDocument="Assets\Scripts\MUE Engine\SolarSystem.cs">
     <Files>
-      <File FileName="Assets\Scripts\MUE Engine\SolarSystem.cs" Line="11" Column="112" />
-      <File FileName="Assets\Scripts\MUE Engine\Planet.cs" Line="1546" Column="91" />
-      <File FileName="Assets\Scripts\Controllers\PlanetCharacterController.cs" Line="1" Column="1" />
-      <File FileName="Assets\Scripts\Camera\WowPlanetCamera.cs" Line="1" Column="1" />
-      <File FileName="Assets\Scripts\MUE Engine\MeshLodTris.cs" Line="1" Column="1" />
-      <File FileName="Assets\Assets\Shaders\Grass.shader" Line="1" Column="1" />
-      <File FileName="Assets\Assets\Shaders\Tree.shader" Line="1" Column="1" />
-      <File FileName="Assets\Assets\Shaders\VertexColoredFade.shader" Line="1" Column="1" />
-      <File FileName="Assets\Assets\Shaders\VertexLayeredTerrain.shader" Line="110" Column="34" />
-      <File FileName="Assets\Scripts\MUE Engine\AsteroidField.cs" Line="1" Column="1" />
-      <File FileName="Assets\Assets\Shaders\AthmosphereScript.cs" Line="16" Column="82" />
-      <File FileName="Assets\Assets\Shaders\VertexLayeredTerrainNoFog.shader" Line="51" Column="6" />
-      <File FileName="Assets\Assets\Shaders\Athmosphere.shader" Line="23" Column="5" />
-      <File FileName="Assets\Assets\Shaders\AthmosphereAndClouds.shader" Line="21" Column="3" />
+      <File FileName="Assets\Scripts\MUE Engine\SolarSystem.cs" Line="34" Column="40" />
     </Files>
   </MonoDevelop.Ide.Workbench>
   <MonoDevelop.Ide.DebuggingService.Breakpoints>
