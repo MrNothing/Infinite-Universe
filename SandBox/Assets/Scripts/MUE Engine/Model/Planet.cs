@@ -1419,8 +1419,8 @@ public class Planet : MonoBehaviour {
 			return 0;
 	}
 	
-	public GameObject[] details;
-	public GameObject[] trees;
+	public Doodad[] details;
+	public Doodad[] trees;
 	
 	void addDetail(MeshFilter filter, int vertice, Vector3 verticePos, int detail)
 	{
@@ -1429,7 +1429,7 @@ public class Planet : MonoBehaviour {
 		if (detail > details.Length - 1)
 			detail = details.Length - 1;
 
-		GameObject obj = (GameObject)Instantiate(details[detail], transform.position+getFragment(filter.transform.TransformPoint(verticePos)+new Vector3(Random.Range(-0.25f, 0.25f), Random.Range(-0.25f, 0.25f), Random.Range(-0.25f, 0.25f))).point, Quaternion.identity);
+		GameObject obj = (GameObject)Instantiate(details[detail].gameObject, transform.position+getFragment(filter.transform.TransformPoint(verticePos)+new Vector3(Random.Range(-0.25f, 0.25f), Random.Range(-0.25f, 0.25f), Random.Range(-0.25f, 0.25f))).point, Quaternion.identity);
 		obj.transform.localScale *= Random.Range(0.7f, 1.3f); 
 		obj.transform.parent = filter.transform;
 		
@@ -1448,7 +1448,7 @@ public class Planet : MonoBehaviour {
 		if (detail > trees.Length - 1)
 			detail = trees.Length - 1;
 		
-		GameObject obj = (GameObject)Instantiate(trees[detail], transform.position+getFragment(filter.transform.TransformPoint(verticePos)).point, Quaternion.identity);
+		GameObject obj = (GameObject)Instantiate(trees[detail].gameObject, transform.position+getFragment(filter.transform.TransformPoint(verticePos)).point, Quaternion.identity);
 		obj.transform.localScale *= Random.Range(0.5f, 1.3f); 
 		obj.transform.parent = filter.transform;
 
