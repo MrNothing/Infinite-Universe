@@ -502,6 +502,7 @@ public class Planet : MonoBehaviour {
 		float step=0.1f;
 		
 		Vector3[] vertices = new Vector3[filter.mesh.vertices.Length];
+		Vector3[] seaVertices = new Vector3[filter.mesh.vertices.Length];
 		Color[] colors = new Color[filter.mesh.vertices.Length];
 		Color[] seaColors = new Color[filter.mesh.vertices.Length];
 		
@@ -509,22 +510,32 @@ public class Planet : MonoBehaviour {
 		
 		float minPerlin=10;
 		float maxPerlin=0;
-		
+
+		float totalHeight = 0;
+
+		foreach(PerlinConfig p in perlins)
+			totalHeight+=p.height;
+
 		for(int i=0; i<vertices.Length; i++)
 		{
 	
 			NoiseInfos noise = getFragment(transform.TransformPoint(vertices[i]));
+
+			if((vertices[i].normalized*radius).magnitude+seaLevel>noise.point.magnitude)
+				seaColors[i] = new Color(0, 0, 0, 1-Mathf.Abs(((vertices[i].normalized*radius).magnitude+seaLevel)-noise.point.magnitude)/totalHeight*foam);	
+			else
+				seaColors[i] = new Color(0, 0, 0, 1);	
+
+			seaVertices[i] = noise.point.normalized*radius+noise.point.normalized*(seaLevel);
+
 			vertices[i] = noise.point;
 			
 			float perlinEffects = 0;
-			float totalHeight = 0;
-			
+
 			float range=0.02f;
 			
 			if(method==NoiseMethod.Plains)
 			{
-				foreach(PerlinConfig p in perlins)
-					totalHeight+=p.height;
 				
 				for(int k=0; k<perlins.Length; k++)
 				{
@@ -582,12 +593,6 @@ public class Planet : MonoBehaviour {
 			if(gFact<0)
 				gFact = 0;
 
-			if(perlinEffects<seaLevel)
-				seaColors[i] = new Color(0, 0, 0, 1-Mathf.Abs(seaLevel-perlinEffects)*10);	
-			else
-				seaColors[i] = new Color(0, 0, 0, 1);	
-				
-
 			colors[i] = new Color(rFact, gFact, bFact, aFact);	
 			
 			//colors[i] = new Color(noise.noise1*color1+noise.noise2*color2, noise.noise1*color1+noise.noise2*color2, noise.noise1*color1+noise.noise2*color2, 1);	
@@ -615,7 +620,7 @@ public class Planet : MonoBehaviour {
 
 		if (enableSea)
 		{
-			sea.mesh.vertices = filter.mesh.vertices;
+			sea.mesh.vertices = seaVertices;
 			sea.mesh.triangles = filter.mesh.triangles;
 			sea.mesh.uv = filter.mesh.uv;
 			sea.mesh.normals = filter.mesh.normals;
@@ -644,6 +649,12 @@ public class Planet : MonoBehaviour {
 		{
 	
 			NoiseInfos noise = getFragment(transform.TransformPoint(vertices[i]));
+
+			bool underWater = false;
+
+			if((vertices[i].normalized*radius).magnitude+seaLevel>noise.point.magnitude)
+				underWater = true;
+
 			vertices[i] = noise.point;
 			
 			float perlinEffects = 0;
@@ -714,7 +725,7 @@ public class Planet : MonoBehaviour {
 			//if(i%2==0 && Planet.rangeFactor(rFact, 0.5f, 0.25f)>0 && script.level==script.maxLevel && details.Length>0 && enableDetails)
 			//	addDetail(origin, i, vertices[i], (int)(Planet.rangeFactor(rFact, 0.5f, 0.25f)*details.Length-1));
 			
-			if(perlinEffects>seaLevel && Planet.rangeFactor(bFact, 0f, 0.1f)>0 && script.level==script.maxLevel && details.Length>0 && enableDetails)
+			if(!underWater && Planet.rangeFactor(bFact, 0f, 0.1f)>0 && script.level==script.maxLevel && details.Length>0 && enableDetails)
 			{
 				if(treeCounter>100+250*rFact && trees.Length>0)
 				{
@@ -759,8 +770,8 @@ public class Planet : MonoBehaviour {
 		yield return new WaitForEndOfFrame();
 	}
 
-	public float seaLevel = -0.2f;
-	public float seaHeight = -40;
+	public float seaLevel = 0;
+	public float foam = 100;
 	public IEnumerator perlinPlanet(MeshFilter origin, int isWater)
 	{
 		if(radius<=1)
@@ -787,44 +798,19 @@ public class Planet : MonoBehaviour {
 			
 			NoiseInfos noise = getFragment(transform.TransformPoint(vertices[i]));
 
-			float perlinEffects = 0;
-			
-			float range=0.02f;
-			
-			if(method==NoiseMethod.Plains)
+			if((vertices[i].normalized*radius).magnitude+seaLevel>noise.point.magnitude)
 			{
+				colors[i] = new Color(0, 0, 0, 1-Mathf.Abs(((vertices[i].normalized*radius).magnitude+seaLevel)-noise.point.magnitude)/totalHeight*foam);	
 
-				for(int k=0; k<perlins.Length; k++)
-				{
-					perlinEffects+=(perlins[k].height/totalHeight*noise.noises[k]);
-				}
-				
-				perlinEffects+=0.1f;
-				perlinEffects*=2;
-				
-				range = 0.1f;
-				
-				if(perlinEffects>1)
-					perlinEffects=1;
-				if(perlinEffects<-1)
-					perlinEffects=-1;
-			}
-			else
-			{
-				perlinEffects = noise.noises[0];
-			}
-			
-			
-			if(perlinEffects<seaLevel)
-			{
-				colors[i] = new Color(0, 0, 0, 1-Mathf.Abs(seaLevel-perlinEffects)*10);	
-				vertices[i] = noise.point.normalized*radius*(1+seaLevel/(5.9f+6f*(radius/641f-1)))+noise.point.normalized*(1-(perlinEffects-seaLevel)*seaHeight);
+				if(colors[i].a<0.1f)
+					colors[i].a = 0.1f;
+
+				vertices[i] = noise.point.normalized*radius+noise.point.normalized*(seaLevel);
 			}
 			else
 			{
 				colors[i] = new Color(0, 0, 0, 1);	
-				vertices[i] = noise.point.normalized*radius*(1+seaLevel/(5.9f+6f*(radius/641f-1)))+noise.point.normalized*(1+(perlinEffects-seaLevel)*seaHeight);
-
+				vertices[i] = noise.point.normalized*radius+noise.point.normalized*(seaLevel);
 			}
 
 			if(i%50==0)
@@ -859,6 +845,7 @@ public class Planet : MonoBehaviour {
 		float step=0.1f;
 		
 		Vector3[] vertices = new Vector3[filter.mesh.vertices.Length];
+
 		Color[] colors = new Color[filter.mesh.vertices.Length];
 		Color[] seaColors = new Color[filter.mesh.vertices.Length];
 		

@@ -1,0 +1,55 @@
+﻿Revert "Added sample scene, reworked project arborescence"
+
+This reverts commit 4303d122c3bab6792568f5c7ed72fbd30e91e8d2.
+
+# Please enter the commit message for your changes. Lines starting
+# with '#' will be ignored, and an empty message aborts the commit.
+# On branch master
+# Your branch is up-to-date with 'origin/master'.
+#
+# Changes to be committed:
+#	deleted:    SandBox/Assets/Assets/Materials/Atmospheres.meta
+#	deleted:    SandBox/Assets/Assets/Materials/Atmospheres/Planet Atmo 4.mat
+#	deleted:    SandBox/Assets/Assets/Materials/Atmospheres/Planet Atmo 5.mat
+#	deleted:    SandBox/Assets/Assets/Materials/Atmospheres/Planet Atmo 6.mat
+#	deleted:    SandBox/Assets/Assets/Materials/Atmospheres/Planet Atmo 6.mat.meta
+#	renamed:    SandBox/Assets/Assets/Materials/Atmospheres/Planet Atmo 2.mat -> SandBox/Assets/Assets/Materials/Planet Atmo 2.mat
+#	renamed:    SandBox/Assets/Assets/Materials/Atmospheres/Planet Atmo 2.mat.meta -> SandBox/Assets/Assets/Materials/Planet Atmo 2.mat.meta
+#	renamed:    SandBox/Assets/Assets/Materials/Atmospheres/Planet Atmo 3.mat -> SandBox/Assets/Assets/Materials/Planet Atmo 3.mat
+#	renamed:    SandBox/Assets/Assets/Materials/Atmospheres/Planet Atmo 3.mat.meta -> SandBox/Assets/Assets/Materials/Planet Atmo 3.mat.meta
+#	renamed:    SandBox/Assets/Assets/Materials/Atmospheres/Planet Atmo.mat -> SandBox/Assets/Assets/Materials/Planet Atmo.mat
+#	renamed:    SandBox/Assets/Assets/Materials/Atmospheres/Planet Atmo.mat.meta -> SandBox/Assets/Assets/Materials/Planet Atmo.mat.meta
+#	renamed:    SandBox/Assets/Assets/Materials/Planets/Terrains/Terrain3_Far.mat -> SandBox/Assets/Assets/Materials/Planets/Terrain1_Close.mat
+#	renamed:    SandBox/Assets/Assets/Materials/Atmospheres/Planet Atmo 5.mat.meta -> SandBox/Assets/Assets/Materials/Planets/Terrain1_Close.mat.meta
+#	renamed:    SandBox/Assets/Assets/Materials/Planets/Terrains/Terrain1_Far.mat -> SandBox/Assets/Assets/Materials/Planets/Terrain1_Far.mat
+#	renamed:    SandBox/Assets/Assets/Materials/Planets/Terrains/Terrain1_Far.mat.meta -> SandBox/Assets/Assets/Materials/Planets/Terrain1_Far.mat.meta
+#	renamed:    SandBox/Assets/Assets/Materials/Planets/Terrains/Terrain4_Far.mat -> SandBox/Assets/Assets/Materials/Planets/Terrain2_Close.mat
+#	renamed:    SandBox/Assets/Assets/Materials/Atmospheres/Planet Atmo 4.mat.meta -> SandBox/Assets/Assets/Materials/Planets/Terrain2_Close.mat.meta
+#	renamed:    SandBox/Assets/Assets/Materials/Planets/Terrains/Terrain2_Far.mat -> SandBox/Assets/Assets/Materials/Planets/Terrain2_Far.mat
+#	renamed:    SandBox/Assets/Assets/Materials/Planets/Terrains/Terrain2_Far.mat.meta -> SandBox/Assets/Assets/Materials/Planets/Terrain2_Far.mat.meta
+#	deleted:    SandBox/Assets/Assets/Materials/Planets/Terrains.meta
+#	deleted:    SandBox/Assets/Assets/Materials/Planets/Terrains/Terrain3_Far.mat.meta
+#	deleted:    SandBox/Assets/Assets/Materials/Planets/Terrains/Terrain4_Far.mat.meta
+#	deleted:    SandBox/Assets/Assets/Materials/Planets/Terrains/Terrain5_Far.mat
+#	deleted:    SandBox/Assets/Assets/Materials/Planets/Terrains/Terrain5_Far.mat.meta
+#	deleted:    SandBox/Assets/Assets/Materials/Planets/Terrains/Terrain6_Far.mat
+#	deleted:    SandBox/Assets/Assets/Materials/Planets/Terrains/Terrain6_Far.mat.meta
+#	deleted:    SandBox/Assets/Scenes/sample.unity
+#	deleted:    SandBox/Assets/Scenes/sample.unity.meta
+#
+# Changes not staged for commit:
+#	modified:   SandBox/Assembly-CSharp-Editor-vs.csproj
+#	modified:   SandBox/Assembly-CSharp-Editor.csproj
+#	modified:   SandBox/Assembly-CSharp-firstpass-vs.csproj
+#	modified:   SandBox/Assembly-CSharp-firstpass.csproj
+#	modified:   SandBox/Assembly-CSharp-vs.csproj
+#	modified:   SandBox/Assembly-CSharp.csproj
+#	modified:   SandBox/Assembly-UnityScript-Editor-vs.unityproj
+#	modified:   SandBox/Assembly-UnityScript-Editor.unityproj
+#	modified:   SandBox/Assembly-UnityScript-firstpass-vs.unityproj
+#	modified:   SandBox/Assembly-UnityScript-firstpass.unityproj
+#	modified:   SandBox/SandBox-csharp.sln
+#	modified:   SandBox/SandBox.sln
+#	modified:   SandBox/SandBox.userprefs
+#
+

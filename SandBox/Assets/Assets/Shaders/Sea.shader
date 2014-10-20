@@ -13,10 +13,12 @@
 		_ReflectionIntensity("Reflection Intensity", Float) = 1
 		_GlobalAlpha ("Global Alpha", Range(0, 1)) = 1
 		_Fading ("_Fading", Float) = 50
+		_SeaTransparencyRange ("_SeaTransparencyRange", Float) = 10
 	}
 	
 	SubShader {
-		Pass{
+		
+			Pass{
 			Cull Front
 			Tags {"Queue" = "Transparent"} 
 			 ZWrite Off // don't write to depth buffer 
@@ -44,6 +46,7 @@
 			uniform float _ReflectionIntensity;
 			uniform float _GlobalAlpha;
 			uniform float _Fading;
+			uniform float _SeaTransparencyRange;
 			
 			struct input
 			{
@@ -86,9 +89,18 @@
 				float3 viewDirection = normalize(_WorldSpaceCameraPos - posWorld.xyz);
 				o.norm.g =  pow(max(0.0, dot( reflect(-_LightDir, v.normal), viewDirection)), _Shininess);
 				
+				float dist = distance(_WorldSpaceCameraPos, posWorld);
+					
+				float ratio = dist/_SeaTransparencyRange;
+				
+				if(ratio<1)
+					o.norm.b = ratio;
+				else
+					o.norm.b = 1;
+				
+				
 				if(_Fading>0)
 				{
-					float dist = distance(_WorldSpaceCameraPos, posWorld);
 					float ratio2 = dist/_Fading;
 					float ratio3 = dist/_Fading-2;
 					
@@ -122,16 +134,20 @@
 				float uy = i.uv1.y+_Time*_FoamSpeed;
 				float2 uvC1 = float2(ux, uy);
 				
-				float ux2 = i.uv1.x+_Time*_FoamSpeed*0.5;
-				float uy2 = i.uv1.y+_Time*_FoamSpeed*0.2;
+				float ux2 = i.uv1.x/2+_Time*_FoamSpeed*0.5;
+				float uy2 = i.uv1.y/2+_Time*_FoamSpeed*0.2;
 				
 				float2 uvC2 = float2(ux2, uy2);
 				
-				fixed4 noiseTex = tex2D (_Layer1, i.uv);
-				fixed4 foamTex = tex2D (_Foam, uvC1);
-				fixed4 foamTex2 = tex2D (_Foam, uvC2);
+				float ux3 = i.uv.x+_Time*_FoamSpeed;
+				float uy3 = i.uv.y+_Time*_FoamSpeed;
+				float2 uvC3 = float2(ux3, uy3);
 				
-				foamTex = foamTex*foamTex2*1.5;
+				fixed4 noiseTex = tex2D (_Layer1,uvC3);
+				fixed4 foamTex = tex2D (_Layer1, uvC1);
+				fixed4 foamTex2 = tex2D (_Layer1, uvC3);
+				
+				foamTex = foamTex*foamTex2*5+0.5;
 				
 				fixed4 cloudColor = fixed4(1,1,1,1);
 				
@@ -154,10 +170,10 @@
 				}
 				
 				_Tint+=cloudColor.a*(_FoamIntensity+i.norm.g*foamTex.r);
-				_Tint.rgb*=i.norm.r+i.norm.g*foamTex.r*2;
-				_Tint.a *= _GlobalAlpha*i.norm.a;
-				
-				return _Tint*noiseTex.r;
+				_Tint.rgb*=i.norm.r+i.norm.g*foamTex.r*2*_SunColor;
+				_Tint.a *= _GlobalAlpha*i.norm.a+i.norm.b*i.norm.b+i.norm.g;
+				noiseTex.rgb*=2;
+				return _Tint;
 			}
 			
 			ENDCG
@@ -190,6 +206,7 @@
 			uniform float _ReflectionIntensity;
 			uniform float _GlobalAlpha;
 			uniform float _Fading;
+			uniform float _SeaTransparencyRange;
 			
 			struct input
 			{
@@ -232,9 +249,18 @@
 				float3 viewDirection = normalize(_WorldSpaceCameraPos - posWorld.xyz);
 				o.norm.g =  pow(max(0.0, dot( reflect(-_LightDir, v.normal), viewDirection)), _Shininess);
 				
+				float dist = distance(_WorldSpaceCameraPos, posWorld);
+					
+				float ratio = dist/_SeaTransparencyRange;
+				
+				if(ratio<1)
+					o.norm.b = ratio;
+				else
+					o.norm.b = 1;
+				
+				
 				if(_Fading>0)
 				{
-					float dist = distance(_WorldSpaceCameraPos, posWorld);
 					float ratio2 = dist/_Fading;
 					float ratio3 = dist/_Fading-2;
 					
@@ -268,16 +294,20 @@
 				float uy = i.uv1.y+_Time*_FoamSpeed;
 				float2 uvC1 = float2(ux, uy);
 				
-				float ux2 = i.uv1.x+_Time*_FoamSpeed*0.5;
-				float uy2 = i.uv1.y+_Time*_FoamSpeed*0.2;
+				float ux2 = i.uv1.x/2+_Time*_FoamSpeed*0.5;
+				float uy2 = i.uv1.y/2+_Time*_FoamSpeed*0.2;
 				
 				float2 uvC2 = float2(ux2, uy2);
 				
-				fixed4 noiseTex = tex2D (_Layer1, i.uv);
-				fixed4 foamTex = tex2D (_Foam, uvC1);
-				fixed4 foamTex2 = tex2D (_Foam, uvC2);
+				float ux3 = i.uv.x+_Time*_FoamSpeed;
+				float uy3 = i.uv.y+_Time*_FoamSpeed;
+				float2 uvC3 = float2(ux3, uy3);
 				
-				foamTex = foamTex*foamTex2*1.5;
+				fixed4 noiseTex = tex2D (_Layer1,uvC3);
+				fixed4 foamTex = tex2D (_Layer1, uvC1);
+				fixed4 foamTex2 = tex2D (_Layer1, uvC3);
+				
+				foamTex = foamTex*foamTex2*5+0.5;
 				
 				fixed4 cloudColor = fixed4(1,1,1,1);
 				
@@ -300,14 +330,15 @@
 				}
 				
 				_Tint+=cloudColor.a*(_FoamIntensity+i.norm.g*foamTex.r);
-				_Tint.rgb*=i.norm.r+i.norm.g*foamTex.r*2;
-				_Tint.a *= _GlobalAlpha*i.norm.a;
-				
-				return _Tint*noiseTex.r;
+				_Tint.rgb*=i.norm.r+i.norm.g*foamTex.r*2*_SunColor;
+				_Tint.a *= _GlobalAlpha*i.norm.a+i.norm.b*i.norm.b+i.norm.g;
+				noiseTex.rgb*=2;
+				return _Tint;
 			}
 			
 			ENDCG
 		}
+		
 	} 
 	FallBack "Diffuse"
 }
