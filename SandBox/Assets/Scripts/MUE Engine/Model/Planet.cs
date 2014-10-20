@@ -92,7 +92,7 @@ public class Planet : MonoBehaviour {
 
 		radius = Vector3.Distance(transform.TransformPoint(filter.mesh.vertices[0]), transform.position);
 
-		Debug.Log (name+": " + transform.TransformPoint (filter.mesh.vertices [0]));
+		//Debug.Log (name+": " + transform.TransformPoint (filter.mesh.vertices [0]));
 
 		step = radius*0.0000025f;
 		
@@ -130,6 +130,20 @@ public class Planet : MonoBehaviour {
 		{
 				
 		}
+
+		try
+		{
+			skyDome.transform.localScale = Vector3.one*(radius+90);
+			clouds.transform.localScale = Vector3.one*(radius+85);	
+			sea.transform.localScale = Vector3.one;
+		}
+		catch
+		{
+				
+		}
+
+		filter.mesh.RecalculateNormals ();
+		initClouds();
 	}
 
 	public bool isIsland = false;
@@ -174,7 +188,7 @@ public class Planet : MonoBehaviour {
 
 			float ratio = Vector3.Distance(point, testcamera.transform.position)/skyDistance;
 
-			Debug.DrawLine(transform.position, transform.position+point);
+			//Debug.DrawLine(transform.position, transform.position+point);
 
 			if(ratio<1)
 			{
@@ -207,23 +221,6 @@ public class Planet : MonoBehaviour {
 		{
 			
 		}
-		//radius = transform.localScale.x;
-		
-		/*if(Vector3.Distance(Camera.mainCamera.transform.position, transform.position)<radius+10)
-		{
-			float planetAlpha = Mathf.Abs(Vector3.Distance(Camera.mainCamera.transform.position, transform.position)-radius);
-			
-			if(planetAlpha<0)
-				planetAlpha = 0;
-			
-		
-			
-			//renderer.material.color = new Color(1, 1, 1, planetAlpha/10f);
-		}
-		else
-		{
-			//renderer.material.color = new Color(1, 1, 1, 1);
-		}*/
 		
 		if(init)
 		{
@@ -243,120 +240,6 @@ public class Planet : MonoBehaviour {
 			
 	}
 	
-	public float color1;
-	public float color2;
-	
-	float slowOffset=0;
-	float farOffset=0;
-	void OnGUI()
-	{
-		if(!enableGui)
-			return;
-		
-		//if(Input.GetMouseButton(0) && enableGui)
-		//	draw=true;
-		
-		GUILayout.BeginArea(new Rect(0, 0, 150, 600));
-		//GUILayout.Label("NoiseOffset1");
-		//noiseOffset.x=GUILayout.HorizontalSlider(noiseOffset.x, 0, 100);
-		//GUILayout.Label("PerlinScale1");
-		//perlinScale=GUILayout.HorizontalSlider(perlinScale, 0, 3);
-		//GUILayout.Label("PerlinScale2");
-		//perlinScale2=GUILayout.HorizontalSlider(perlinScale2, 0, 3);
-		//GUILayout.Label("PerlinHeight1");
-		//perlinHeight=GUILayout.HorizontalSlider(perlinHeight, 0f, 10f);
-		//GUILayout.Label("PerlinHeight2");
-		//perlinHeight2=GUILayout.HorizontalSlider(perlinHeight2, 0f, 10f);
-		/*GUILayout.Label("TerrainColor1");
-		color1=GUILayout.HorizontalSlider(color1, 0f, 1);
-		GUILayout.Label("TerrainColor2");
-		color2=GUILayout.HorizontalSlider(color2, 0f, 1);*/
-		
-		GUILayout.Label("Camera Distance");
-		farOffset = GUILayout.HorizontalSlider(farOffset, -10, -1000);
-		GUILayout.Label("Camera Distance Slow");
-		slowOffset = GUILayout.HorizontalSlider(slowOffset, 0, 10);
-		
-		testcamera.transform.localPosition = new Vector3(testcamera.transform.localPosition.x, testcamera.transform.localPosition.y, farOffset+slowOffset);
-		
-		GUILayout.Label("Camera Rotation");
-		//rotate.transform.eulerAngles = new Vector3(0, GUILayout.HorizontalSlider(rotate.eulerAngles.y, -180, 180), 0);
-
-		GUILayout.EndArea();
-	}
-	
-	/*public IEnumerator makeBlocGround()
-	{
-			int counter = 0;
-			Vector3 p1 = getFragment(testcamera.transform.position).point;
-			
-			if(Vector3.Distance(p1, test.transform.position)<10 && enableBlocs)
-			{
-				float _radius = Vector3.Distance(p1,transform.position);
-	
-				///Debug.DrawLine(transform.position, p1);
-				
-				PolarPoint p1Polar = PolarPoint.getPolarCoordinates(p1, radius);
-	
-				for(float i=-range; i<range; i++)
-				{	
-					for(float j=-range; j<range; j++)
-					{
-						PolarPoint flatPoint = new PolarPoint(p1Polar.theta-Mathf.Asin(step*i), p1Polar.phi+Mathf.Acos(step*j)-Mathf.PI/2, p1Polar.r);
-	
-						flatPoint = PolarPoint.flatten(flatPoint, step);
-						Vector3 point = getFragment(PolarPoint.getCartesianCoordinates(flatPoint)).point;
-	
-						float normalAngle = PolarPoint.normalizeAngle(flatPoint.phi);
-	
-						Vector3 localPosition = point-transform.position;
-	
-						flatPoint = new PolarPoint(p1Polar.theta+Mathf.Acos(step*i)-Mathf.PI/2, p1Polar.phi+Mathf.Asin(step*j), p1Polar.r);
-							
-						flatPoint = PolarPoint.flatten(flatPoint, step);
-						
-							
-						if(MeshIndexer.CountSurroundingMeshes(point, 1)==0 && Vector3.Distance(point, core.player.transform.position)<50)
-						{
-							
-							GameObject bloc = (GameObject)Instantiate(Resources.Load("SphereGrass", typeof(GameObject)), point, Quaternion.identity);
-							bloc.transform.parent = blocsContainer.transform;
-							bloc.transform.LookAt(transform.position);
-							bloc.transform.Rotate(-90, 0, 0);
-							bloc.GetComponent<MeshBlender>().wait = Vector3.Distance(bloc.transform.position, testcamera.transform.position)*5;
-							bloc.GetComponent<MeshBlender>().isTerrainBloc = true;
-							MeshIndexer.IndexMesh(bloc.GetComponent<MeshBlender>());
-							blocsByPolarCoords.Add(bloc.transform.position.ToString(), true);
-						}
-						
-						if(localPosition.y>_radius*0.75f || localPosition.y<-_radius*0.75f)
-						{
-							
-							//Debug.DrawLine(transform.position+(point-transform.position)*0.999f, point, Color.red);
-						}
-						else
-						{
-							//find an other way here... until then, the poles of my planet will remain empty.
-							//Debug.DrawLine(transform.position+(point-transform.position)*0.999f, point, Color.blue);
-							
-						}
-	
-						debugPoint.phi = normalAngle;
-					
-						if(counter>5)
-						{
-							counter=0;
-							yield return new WaitForEndOfFrame();
-						}
-						
-						counter++;
-					}
-				}
-			}
-
-		
-	}
-	*/
 	public float range = 10;
 	public float step = Mathf.PI/100f;
 	
@@ -533,12 +416,12 @@ public class Planet : MonoBehaviour {
 		cloudVertices = new Vector3[clouds.mesh.vertices.Length];
 		cloudColors = new Color[clouds.mesh.vertices.Length];
 
-		StartCoroutine (perlinClouds (0, clouds.mesh.vertices.Length));
+		perlinClouds (0, clouds.mesh.vertices.Length);
 	}
 
 	Vector3[] cloudVertices;
 	Color[] cloudColors;
-	IEnumerator perlinClouds(int start, int end)
+	void perlinClouds(int start, int end)
 	{
 		if (start < 0)
 			start = 0;
@@ -554,7 +437,6 @@ public class Planet : MonoBehaviour {
 		{
 		
 			NoiseInfos noise = getFragment (transform.TransformPoint (clouds.mesh.vertices [i]));
-			cloudVertices[i] = transform.InverseTransformPoint(noise.point);
 			float perlinEffects = 0;
 			
 			float range = 0.02f;
@@ -601,20 +483,14 @@ public class Planet : MonoBehaviour {
 			if(gFact<0)
 				gFact = 0;
 			
-			cloudColors[i] = new Color(Mathf.PerlinNoise(gFact, rFact), gFact, bFact, aFact);	
-			
-			if(i%100==0)
-			yield return new WaitForEndOfFrame();
+			cloudColors[i] = new Color(rFact, gFact, bFact, aFact);	
 		}
 
 		asyncInit--;
-
-		if (asyncInit <= 0) {
-			clouds.mesh.colors = cloudColors;
-			clouds.mesh.vertices = cloudVertices;
-			clouds.mesh.RecalculateBounds ();
-			clouds.mesh.RecalculateNormals ();
-		}
+		clouds.mesh.colors = cloudColors;
+		clouds.mesh.RecalculateBounds ();
+		clouds.mesh.RecalculateNormals ();
+		Debug.Log ("Clouds initalized");
 	}
 
 	public void perlinPlanet()
@@ -723,7 +599,7 @@ public class Planet : MonoBehaviour {
 		filter.mesh.vertices = vertices;
 		filter.mesh.RecalculateBounds();
 		filter.mesh.RecalculateNormals();
-		
+
 		/*
 		for(polarCoordinates.x=0; polarCoordinates.x<Mathf.PI; polarCoordinates.x+=step/2)
 		{	
