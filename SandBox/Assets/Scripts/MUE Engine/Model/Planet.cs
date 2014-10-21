@@ -727,11 +727,11 @@ public class Planet : MonoBehaviour {
 			//place details
 			for(int doodadIndex = 0; doodadIndex<doodads.Length; doodadIndex++)
 			{
-				if((vertices[i].normalized*radius).magnitude+doodads[doodadIndex].minHeight<noise.point.magnitude && (vertices[i].normalized*radius).magnitude+doodads[doodadIndex].minHeight>noise.point.magnitude)
+				if((vertices[i].normalized*radius).magnitude+doodads[doodadIndex].minHeight<noise.point.magnitude && (vertices[i].normalized*radius).magnitude+doodads[doodadIndex].maxHeight>noise.point.magnitude)
 				{
 					if(i%((int)(100-doodads[doodadIndex].frequency))==0 && doodads[doodadIndex].frequency<100 && doodads[doodadIndex].frequency>=0)
 					{
-						addDoodad(origin, i, vertices[i], doodadIndex);
+						addDoodad(origin, i, vertices[i], doodadIndex, doodads[doodadIndex].offsetY);
 						colors[i] += doodads[doodadIndex].vertex;	
 						break;
 					}
@@ -1280,14 +1280,16 @@ public class Planet : MonoBehaviour {
 	
 	public Doodad[] doodads;
 
-	void addDoodad(MeshFilter filter, int vertice, Vector3 verticePos, int detail)
+	void addDoodad(MeshFilter filter, int vertice, Vector3 verticePos, int detail, float offsetY)
 	{
 		if (detail < 0)
 			detail = 0;
 		if (detail > doodads.Length - 1)
 			detail = doodads.Length - 1;
 
-		GameObject obj = (GameObject)Instantiate(doodads[detail].gameObject, transform.position+getFragment(filter.transform.TransformPoint(verticePos)).point, Quaternion.identity);
+		Vector3 point = getFragment (filter.transform.TransformPoint (verticePos)).point;
+
+		GameObject obj = (GameObject)Instantiate(doodads[detail].gameObject, transform.position+point+point.normalized*offsetY, Quaternion.identity);
 		obj.transform.localScale *= Random.Range(0.5f, 1.3f); 
 		obj.transform.parent = filter.transform;
 
@@ -1312,7 +1314,7 @@ public class Planet : MonoBehaviour {
 
 		//obj.transform.localEulerAngles += new Vector3 (0, Random.Range (-180, 180), 0);
 
-		obj.name = "Tree_"+detail+"";
+		obj.name = "Doodad_"+detail+"";
 	}
 
 	public Color getAtmosphereColor(Vector3 pos)

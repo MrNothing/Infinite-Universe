@@ -124,8 +124,8 @@ SubShader {
 				if(colo.a>_CutoutOffset)
 					colo.a = 1;
 				
-				if(i.realAlpha>0)
-				colo.a=1;
+				//if(i.realAlpha>0)
+				//colo.a=1;
 				
 				return colo;
 			}
@@ -239,8 +239,8 @@ SubShader {
 				if(colo.a>_CutoutOffset)
 					colo.a = 1;
 				
-				if(i.realAlpha>0)
-				colo.a=1;
+				//if(i.realAlpha>0)
+				//colo.a=1;
 				
 				return colo;
 			}
