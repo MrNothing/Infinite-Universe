@@ -48,7 +48,7 @@ Shader "MrNothing's Shaders/Vertex Layered Terrain No Z" {
 	    //
 		    // Render normally
 	    Pass {
-	        ZWrite Off
+	        ZWrite On
 	       	Blend SrcAlpha OneMinusSrcAlpha
 	      	ColorMask RGB
 			LOD 200
