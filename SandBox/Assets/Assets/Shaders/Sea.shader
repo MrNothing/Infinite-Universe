@@ -20,8 +20,8 @@
 		
 			Pass{
 			Cull Front
-			Tags {"Queue" = "Transparent"} 
-			 ZWrite Off // don't write to depth buffer 
+			Tags {"Queue" = "Geometry"} 
+			 ZWrite On // don't write to depth buffer 
             // in order not to occlude other objects
 			Blend SrcAlpha OneMinusSrcAlpha 
             // blend based on the fragment's alpha value
@@ -151,27 +151,26 @@
 				
 				fixed4 cloudColor = fixed4(1,1,1,1);
 				
-				cloudColor.a = (1-i.color.a);
-				
+					float foamVal = (foamTex.r+foamTex.g+foamTex.b)/3;
 				
 				if(i.color.a<1 && i.color.a>_FoamRange)
 				{	
-					cloudColor.a = (1-i.color.a)*2*foamTex.r;
+					cloudColor.a = (1-i.color.a)*foamVal*2;
 				}
 				
 				
 				if(i.color.a<_FoamRange)
 				{
-					cloudColor.a = (1-(_FoamRange-i.color.a)/_FoamRange)*foamTex.r;
+					cloudColor.a = (1-(_FoamRange-i.color.a)/_FoamRange)*foamVal;
 				}
 				else
 				{
 					_Tint.a = (1-i.color.a);
 				}
 				
-				_Tint+=cloudColor.a*(_FoamIntensity+i.norm.g*foamTex.r);
+				_Tint+=cloudColor.a*(_FoamIntensity+i.norm.g*foamVal);
 				_Tint.rgb*=i.norm.r+i.norm.g*foamTex.r*2*_SunColor;
-				_Tint.a *= _GlobalAlpha*i.norm.a+i.norm.b*i.norm.b+i.norm.g;
+				_Tint.a *= (i.norm.b*i.norm.b+i.norm.g)*_GlobalAlpha*i.norm.a;
 				noiseTex.rgb*=2;
 				return _Tint;
 			}
@@ -313,25 +312,26 @@
 				
 				cloudColor.a = (1-i.color.a);
 				
+				float foamVal = (foamTex.r+foamTex.g+foamTex.b)/3;
 				
 				if(i.color.a<1 && i.color.a>_FoamRange)
 				{	
-					cloudColor.a = (1-i.color.a)*2*foamTex.r;
+					cloudColor.a = (1-i.color.a)*foamVal*2;
 				}
 				
 				
 				if(i.color.a<_FoamRange)
 				{
-					cloudColor.a = (1-(_FoamRange-i.color.a)/_FoamRange)*foamTex.r;
+					cloudColor.a = (1-(_FoamRange-i.color.a)/_FoamRange)*foamVal;
 				}
 				else
 				{
 					_Tint.a = (1-i.color.a);
 				}
 				
-				_Tint+=cloudColor.a*(_FoamIntensity+i.norm.g*foamTex.r);
+				_Tint+=cloudColor.a*(_FoamIntensity+i.norm.g*foamVal);
 				_Tint.rgb*=i.norm.r+i.norm.g*foamTex.r*2*_SunColor;
-				_Tint.a *= _GlobalAlpha*i.norm.a+i.norm.b*i.norm.b+i.norm.g;
+				_Tint.a *= (i.norm.b*i.norm.b+i.norm.g)*_GlobalAlpha*i.norm.a;
 				noiseTex.rgb*=2;
 				return _Tint;
 			}

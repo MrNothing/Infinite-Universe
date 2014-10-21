@@ -654,11 +654,6 @@ public class Planet : MonoBehaviour {
 	
 			NoiseInfos noise = getFragment(transform.TransformPoint(vertices[i]));
 
-			bool underWater = false;
-
-			if((vertices[i].normalized*radius).magnitude+seaLevel>noise.point.magnitude)
-				underWater = true;
-
 			vertices[i] = noise.point;
 			
 			float perlinEffects = 0;
@@ -728,23 +723,19 @@ public class Planet : MonoBehaviour {
 			
 			//if(i%2==0 && Planet.rangeFactor(rFact, 0.5f, 0.25f)>0 && script.level==script.maxLevel && details.Length>0 && enableDetails)
 			//	addDetail(origin, i, vertices[i], (int)(Planet.rangeFactor(rFact, 0.5f, 0.25f)*details.Length-1));
-			
-			if(!underWater && Planet.rangeFactor(bFact, 0f, 0.1f)>0 && script.level==script.maxLevel && details.Length>0 && enableDetails)
-			{
-				if(treeCounter>100+250*rFact && trees.Length>0)
-				{
-					addTree(origin, i, vertices[i], (int)(Planet.rangeFactor(bFact, 0.0f, 0.1f)*trees.Length*2-1));
-					treeCounter = 0;
-					colors[i].g = 1;	
-				}
 
-				if(i%6==0)
+			//place details
+			for(int doodadIndex = 0; doodadIndex<doodads.Length; doodadIndex++)
+			{
+				if((vertices[i].normalized*radius).magnitude+seaLevel>noise.point.magnitude)
 				{
-					addDetail(origin, i, vertices[i], (int)(Planet.rangeFactor(bFact, 0.0f, 0.1f)*details.Length-1));
-					colors[i].b += 0.3f;	
+					if(i%((int)(100-doodads[doodadIndex].frequency))==0 && doodads[doodadIndex].frequency<100 && doodads[doodadIndex].frequency>=0)
+					{
+						addDoodad(origin, i, vertices[i], doodadIndex);
+						colors[i] += doodads[doodadIndex].vertex;	
+					}
 				}
 			}
-
 			treeCounter++;
 			//colors[i] = new Color(noise.noise1*color1+noise.noise2*color2, noise.noise1*color1+noise.noise2*color2, noise.noise1*color1+noise.noise2*color2, 1);	
 
@@ -1120,8 +1111,8 @@ public class Planet : MonoBehaviour {
 			//if(i%2==0 && Planet.rangeFactor(rFact, 0.5f, 0.25f)>0 && script.level==script.maxLevel && details.Length>0 && enableDetails)
 			//	addDetail(origin, i, vertices[i], (int)(Planet.rangeFactor(rFact, 0.5f, 0.25f)*details.Length-1));
 			
-			if(perlinEffects>seaLevel && i%2==0 && Planet.rangeFactor(bFact, 0f, 0.1f)>0 && script.level==script.maxLevel && details.Length>0 && enableDetails)
-				addDetail(origin, i, vertices[i], (int)(Planet.rangeFactor(gFact, 0f, 0.1f)*details.Length-1));
+			//if(perlinEffects>seaLevel && i%2==0 && Planet.rangeFactor(bFact, 0f, 0.1f)>0 && script.level==script.maxLevel && details.Length>0 && enableDetails)
+			//	addDetail(origin, i, vertices[i], (int)(Planet.rangeFactor(gFact, 0f, 0.1f)*details.Length-1));
 			
 			//colors[i] = new Color(noise.noise1*color1+noise.noise2*color2, noise.noise1*color1+noise.noise2*color2, noise.noise1*color1+noise.noise2*color2, 1);	
 			
@@ -1286,52 +1277,34 @@ public class Planet : MonoBehaviour {
 			return 0;
 	}
 	
-	public Doodad[] details;
-	public Doodad[] trees;
-	
-	void addDetail(MeshFilter filter, int vertice, Vector3 verticePos, int detail)
+	public Doodad[] doodads;
+
+	void addDoodad(MeshFilter filter, int vertice, Vector3 verticePos, int detail)
 	{
 		if (detail < 0)
 			detail = 0;
-		if (detail > details.Length - 1)
-			detail = details.Length - 1;
+		if (detail > doodads.Length - 1)
+			detail = doodads.Length - 1;
 
-		GameObject obj = (GameObject)Instantiate(details[detail].gameObject, transform.position+getFragment(filter.transform.TransformPoint(verticePos)+new Vector3(Random.Range(-0.25f, 0.25f), Random.Range(-0.25f, 0.25f), Random.Range(-0.25f, 0.25f))).point, Quaternion.identity);
-		obj.transform.localScale *= Random.Range(0.7f, 1.3f); 
-		obj.transform.parent = filter.transform;
-		
-		obj.name = "Detail_"+detail+"";
-
-		float ambientLight = Vector3.Dot((sun.transform.position-transform.position).normalized, (obj.transform.position-transform.position).normalized);
-		obj.renderer.material.SetFloat ("_AmbientShadow", ambientLight/2);
-		obj.renderer.material.SetFloat ("_AmbientLight", ambientLight);
-
-	}
-	
-	void addTree(MeshFilter filter, int vertice, Vector3 verticePos, int detail)
-	{
-		if (detail < 0)
-			detail = 0;
-		if (detail > trees.Length - 1)
-			detail = trees.Length - 1;
-		
-		GameObject obj = (GameObject)Instantiate(trees[detail].gameObject, transform.position+getFragment(filter.transform.TransformPoint(verticePos)).point, Quaternion.identity);
+		GameObject obj = (GameObject)Instantiate(doodads[detail].gameObject, transform.position+getFragment(filter.transform.TransformPoint(verticePos)).point, Quaternion.identity);
 		obj.transform.localScale *= Random.Range(0.5f, 1.3f); 
 		obj.transform.parent = filter.transform;
 
-		obj.transform.up = (obj.transform.position-transform.position).normalized;
+		obj.transform.up = filter.mesh.normals[vertice];
 
 		try
 		{
 			float ambientLight = Vector3.Dot((sun.transform.position-transform.position).normalized.normalized, obj.transform.up.normalized);
+			obj.renderer.materials [0].SetFloat ("_AmbientShadow", ambientLight/2);
+			obj.renderer.materials [0].SetFloat ("_AmbientLight", ambientLight);
 			obj.renderer.materials [1].SetVector ("_LightDir", (sun.transform.position-transform.position).normalized);
-         	obj.renderer.materials [0].SetFloat ("_AmbientLight", ambientLight);
 			obj.renderer.materials [1].SetFloat ("_AmbientLight", ambientLight);
 		}
 		catch
 		{
-				
+
 		}
+
 		//obj.transform.Rotate (obj.transform.right, Random.Range (-180, 180));
 
 		//obj.transform.Translate (obj.transform.up*0.40f);
