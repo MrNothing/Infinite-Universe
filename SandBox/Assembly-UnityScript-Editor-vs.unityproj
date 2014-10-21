@@ -60,6 +60,7 @@
      <Compile Include="Assets\Editor\Image Effects\TiltShiftEditor.js" />
      <Compile Include="Assets\Editor\Image Effects\TonemappingEditor.js" />
      <Compile Include="Assets\Editor\Image Effects\VignettingEditor.js" />
+     <None Include="Assets\Assets\Shaders\VertexLayeredTerrainNoZ.shader" />
      <None Include="Assets\Assets\Skydome\Stars Shaders\Alpha-Diffuse NoFog.shader" />
      <None Include="Assets\Standard Assets\Image Effects (Pro Only)\_Sources\Shaders\_BloomAndFlares\BlendOneOne.shader" />
      <None Include="Assets\Standard Assets\Image Effects (Pro Only)\_Sources\Shaders\NoiseEffectShaderRGB.shader" />

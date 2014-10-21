@@ -78,6 +78,8 @@ public class Planet : MonoBehaviour {
 	// Use this for initialization
 	void Start () 
 	{
+		renderer.material.shader = Shader.Find("MrNothing's Shaders/Vertex Layered Terrain No Z");
+
 		testcamera = GameObject.FindObjectOfType<PlanetCharacterController> ().mainCamera.camera;
 
 		filter = GetComponent<MeshFilter>();

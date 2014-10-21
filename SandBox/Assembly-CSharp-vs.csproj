@@ -85,6 +85,7 @@
      <Compile Include="Assets\Scripts\Tools\SimplexNoise.cs" />
      <Compile Include="Assets\Scripts\Tools\SpriteSheet.cs" />
      <Compile Include="Assets\Scripts\Tools\Util.cs" />
+     <None Include="Assets\Assets\Shaders\VertexLayeredTerrainNoZ.shader" />
      <None Include="Assets\Assets\Skydome\Stars Shaders\Alpha-Diffuse NoFog.shader" />
      <None Include="Assets\Standard Assets\Image Effects (Pro Only)\_Sources\Shaders\_BloomAndFlares\BlendOneOne.shader" />
      <None Include="Assets\Standard Assets\Image Effects (Pro Only)\_Sources\Shaders\NoiseEffectShaderRGB.shader" />

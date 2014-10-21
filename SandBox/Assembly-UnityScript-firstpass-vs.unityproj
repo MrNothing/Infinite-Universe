@@ -76,6 +76,7 @@
      <Compile Include="Assets\Standard Assets\Image Effects (Pro Only)\Tonemapping.js" />
      <Compile Include="Assets\Standard Assets\Image Effects (Pro Only)\Triangles.js" />
      <Compile Include="Assets\Standard Assets\Image Effects (Pro Only)\Vignetting.js" />
+     <None Include="Assets\Assets\Shaders\VertexLayeredTerrainNoZ.shader" />
      <None Include="Assets\Assets\Skydome\Stars Shaders\Alpha-Diffuse NoFog.shader" />
      <None Include="Assets\Standard Assets\Image Effects (Pro Only)\_Sources\Shaders\_BloomAndFlares\BlendOneOne.shader" />
      <None Include="Assets\Standard Assets\Image Effects (Pro Only)\_Sources\Shaders\NoiseEffectShaderRGB.shader" />
