@@ -1,14 +1,18 @@
 ﻿<Properties>
-  <MonoDevelop.Ide.Workspace />
-  <MonoDevelop.Ide.Workbench ActiveDocument="Assets\Assets\Shaders\VertexLayeredTerrain.shader">
+  <MonoDevelop.Ide.Workspace ActiveConfiguration="Debug" />
+  <MonoDevelop.Ide.Workbench ActiveDocument="Assets\Scripts\MUE Engine\Model\Planet.cs">
     <Files>
-      <File FileName="Assets\Assets\Shaders\Athmosphere.shader" Line="141" Column="6" />
-      <File FileName="Assets\Assets\Shaders\AthmosphereAndClouds.shader" Line="1" Column="1" />
+      <File FileName="Assets\Scripts\MUE Engine\Model\Planet.cs" Line="732" Column="108" />
+      <File FileName="Assets\Assets\Shaders\Athmosphere.shader" Line="1" Column="1" />
+      <File FileName="Assets\Assets\Shaders\Sea.shader" Line="1" Column="1" />
+      <File FileName="Assets\Scripts\Controllers\PlanetCharacterController.cs" Line="1" Column="1" />
+      <File FileName="Assets\Scripts\MUE Engine\Model\Doodad.cs" Line="15" Column="18" />
+      <File FileName="Assets\Assets\Shaders\Clouds.shader" Line="1" Column="1" />
+      <File FileName="Assets\Assets\Shaders\Grass.shader" Line="1" Column="1" />
+      <File FileName="Assets\Standard Assets\Image Effects (Pro Only)\DepthOfField34.js" Line="1" Column="1" />
+      <File FileName="Assets\Scripts\MUE Engine\Model\MeshLodTris.cs" Line="1" Column="1" />
       <File FileName="Assets\Assets\Shaders\VertexLayeredTerrainNoZ.shader" Line="1" Column="1" />
-      <File FileName="Assets\Assets\Shaders\VertexLayeredTerrainNoFog.shader" Line="1" Column="1" />
-      <File FileName="Assets\Assets\Shaders\VertexLayeredTerrainFadeFlipped.shader" Line="1" Column="1" />
-      <File FileName="Assets\Assets\Shaders\VertexLayeredTerrainFade.shader" Line="1" Column="1" />
-      <File FileName="Assets\Assets\Shaders\VertexLayeredTerrain.shader" Line="51" Column="19" />
+      <File FileName="Assets\Assets\Shaders\Tree.shader" Line="251" Column="2" />
     </Files>
   </MonoDevelop.Ide.Workbench>
   <MonoDevelop.Ide.DebuggingService.Breakpoints>
