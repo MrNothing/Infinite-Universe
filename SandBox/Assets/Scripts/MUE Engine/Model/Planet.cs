@@ -1389,4 +1389,13 @@ public class Planet : MonoBehaviour {
 
 		return new Vector3(point.x+t*planeNormal.x, point.y+t*planeNormal.y, point.z+t*planeNormal.z);
 	}
+
+	public bool isUnderWater()
+	{
+		Vector3 testPoint = testcamera.transform.position-transform.position;
+		if(((testPoint).normalized*radius).magnitude+seaLevel>testPoint.magnitude)
+			return true;
+		else
+			return false;
+	}
 }

@@ -48,7 +48,7 @@ public class PlanetCharacterController : MonoBehaviour {
 
 	// Update is called once per frame
 	void Update () {
-		
+
 		getGravityCenter();
 		
 		AdjustToGravity();
@@ -119,7 +119,9 @@ public class PlanetCharacterController : MonoBehaviour {
 			lastPosition = transform.position;
 		}*/
 	}
-	
+
+	public DepthOfField34 depthOfField;
+
     public static Planet currentPlanet=null;
     bool updateWater=false;
 	void getGravityCenter()
@@ -194,6 +196,16 @@ public class PlanetCharacterController : MonoBehaviour {
 			if(RenderSettings.fogDensity>0.02f)
 				RenderSettings.fogDensity=0.02f;
 
+			if(PlanetCharacterController.currentPlanet.isUnderWater())
+			{
+				RenderSettings.fogDensity=0.07f;
+				depthOfField.enabled = true;
+			}
+			else
+			{
+				depthOfField.enabled = false;
+			}
+
 			Color atmosphereColor;
 			
 			try
@@ -251,6 +263,7 @@ public class PlanetCharacterController : MonoBehaviour {
 				}
 				RenderSettings.fogDensity = 0;
 			}
+			depthOfField.enabled = false;
 		}
 	}
 	
