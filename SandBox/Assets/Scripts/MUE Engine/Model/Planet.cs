@@ -729,7 +729,7 @@ public class Planet : MonoBehaviour {
 			{
 				if((vertices[i].normalized*radius).magnitude+doodads[doodadIndex].minHeight<noise.point.magnitude && (vertices[i].normalized*radius).magnitude+doodads[doodadIndex].maxHeight>noise.point.magnitude)
 				{
-					if(i%((int)(100-doodads[doodadIndex].frequency))==0 && doodads[doodadIndex].frequency<100 && doodads[doodadIndex].frequency>=0)
+					if(doodads[doodadIndex].frequency>Mathf.Abs(Mathf.PerlinNoise((rFact+bFact)*100, (gFact+aFact)*100))*2 && doodads[doodadIndex].frequency<1000 && doodads[doodadIndex].frequency>=0)
 					{
 						addDoodad(origin, i, vertices[i], doodadIndex, doodads[doodadIndex].offsetY);
 						colors[i] += doodads[doodadIndex].vertex;	
@@ -1282,15 +1282,10 @@ public class Planet : MonoBehaviour {
 
 	void addDoodad(MeshFilter filter, int vertice, Vector3 verticePos, int detail, float offsetY)
 	{
-		if (detail < 0)
-			detail = 0;
-		if (detail > doodads.Length - 1)
-			detail = doodads.Length - 1;
-
 		Vector3 point = getFragment (filter.transform.TransformPoint (verticePos)).point;
 
 		GameObject obj = (GameObject)Instantiate(doodads[detail].gameObject, transform.position+point+point.normalized*offsetY, Quaternion.identity);
-		obj.transform.localScale *= Random.Range(0.5f, 1.3f); 
+		obj.transform.localScale *= Random.Range(doodads[detail].minScaleFactor, doodads[detail].maxScaleFactor); 
 		obj.transform.parent = filter.transform;
 
 		obj.transform.up = filter.mesh.normals[vertice];
@@ -1308,7 +1303,7 @@ public class Planet : MonoBehaviour {
 
 		}
 
-		//obj.transform.Rotate (obj.transform.right, Random.Range (-180, 180));
+		obj.transform.RotateAround (obj.transform.position, filter.mesh.normals[vertice].normalized, Random.Range (-180, 180));
 
 		//obj.transform.Translate (obj.transform.up*0.40f);
 
