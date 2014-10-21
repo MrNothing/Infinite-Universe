@@ -727,7 +727,7 @@ public class Planet : MonoBehaviour {
 			//place details
 			for(int doodadIndex = 0; doodadIndex<doodads.Length; doodadIndex++)
 			{
-				if((vertices[i].normalized*radius).magnitude+seaLevel>noise.point.magnitude)
+				if((vertices[i].normalized*radius).magnitude+doodads[doodadIndex].minHeight<noise.point.magnitude && (vertices[i].normalized*radius).magnitude+doodads[doodadIndex].minHeight>noise.point.magnitude)
 				{
 					if(i%((int)(100-doodads[doodadIndex].frequency))==0 && doodads[doodadIndex].frequency<100 && doodads[doodadIndex].frequency>=0)
 					{
