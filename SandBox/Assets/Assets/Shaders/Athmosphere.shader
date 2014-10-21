@@ -17,7 +17,7 @@ Shader "MrNothing's Shaders/Athmosphere" {
 		Fog {Mode Off}		
 		Pass
 		{
-			ZWrite Off
+			ZWrite On
 			Blend SrcAlpha OneMinusSrcAlpha
 			ColorMask RGB
 			 
@@ -207,7 +207,7 @@ Shader "MrNothing's Shaders/Athmosphere" {
 		
 		Pass
 		{
-			ZWrite Off
+			ZWrite On
 			Blend SrcAlpha OneMinusSrcAlpha
 			ColorMask RGB
 			 
