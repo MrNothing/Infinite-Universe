@@ -1,5 +1,5 @@
 fileFormatVersion: 2
-guid: 70545e90e33ff4d439418b623de5b048
+guid: 33148e9ffe61c45e1b4cc76e93b334c6
 labels:
 - Flora
 - Farm
@@ -14,7 +14,6 @@ ModelImporter:
     2800000: __AssetImporterPreview
     3300000: //RootNode
     4300000: polySurface1
-    4300002: polySurface2
     11100000: //RootNode
   materials:
     importMaterials: 1
@@ -35,7 +34,7 @@ ModelImporter:
     isReadable: 1
   meshes:
     lODScreenPercentages: []
-    globalScale: 3.5
+    globalScale: 7
     meshCompression: 0
     addColliders: 0
     importBlendShapes: 1
