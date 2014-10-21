@@ -73,6 +73,8 @@ public class Planet : MonoBehaviour {
 	SimplexNoiseGenerator perlin;
 	
 	public float scale = 1;
+
+	public Vector2 lodTilingScale = new Vector2(80,80);
 	// Use this for initialization
 	void Start () 
 	{

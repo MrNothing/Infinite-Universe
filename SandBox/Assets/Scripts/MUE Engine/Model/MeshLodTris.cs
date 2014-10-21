@@ -57,7 +57,7 @@ public class MeshLodTris : MonoBehaviour {
 			else
 				StartCoroutine (planet.perlinIsland (myFilter, this, true));
 
-			renderer.material.SetTextureScale ("_Layer1", new Vector2 (80 * level * level, 80 * level * level));
+			renderer.material.SetTextureScale ("_Layer1", new Vector2 (lodTilingScale.x * level * level, lodTilingScale.y * level * level));
 		}
 		else 
 		{
