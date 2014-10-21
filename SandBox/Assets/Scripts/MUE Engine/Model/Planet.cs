@@ -733,6 +733,7 @@ public class Planet : MonoBehaviour {
 					{
 						addDoodad(origin, i, vertices[i], doodadIndex);
 						colors[i] += doodads[doodadIndex].vertex;	
+						break;
 					}
 				}
 			}
