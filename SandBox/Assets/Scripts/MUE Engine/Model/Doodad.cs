@@ -9,7 +9,7 @@ public class Doodad {
 	public float frequency = 1;
 	public float minHeight = 0;
 	public float maxHeight = 15;
-	public Color vertex = new Color(0.5f, 0, 0, 0);
+	public float shadow = 0.5f;
 	public float offsetY = 0;
 	public float minScaleFactor = 0.5f;
 	public float maxScaleFactor = 1.5f;

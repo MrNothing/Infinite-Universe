@@ -124,6 +124,7 @@
      <None Include="Assets\Standard Assets\Image Effects (Pro Only)\_Sources\Shaders\SSAOShader.shader" />
      <None Include="Assets\Assets\Skydome\Stars Shaders\Unlit Alpha NoFog.shader" />
      <None Include="Assets\Assets\Shaders\Grass.shader" />
+     <None Include="Assets\Assets\Shaders\VertexBlendedTerrain.shader" />
      <None Include="Assets\Standard Assets\Image Effects (Pro Only)\_Sources\Shaders\ConvertDepth.shader" />
      <None Include="Assets\Assets\Shaders\GradientGlow.shader" />
      <None Include="Assets\Standard Assets\Image Effects (Pro Only)\_Sources\Shaders\ColorCorrectionCurvesSimple.shader" />

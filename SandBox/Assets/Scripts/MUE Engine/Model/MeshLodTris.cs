@@ -57,7 +57,7 @@ public class MeshLodTris : MonoBehaviour {
 			else
 				StartCoroutine (planet.perlinIsland (myFilter, this, true));
 
-			renderer.material.shader = Shader.Find("MrNothing's Shaders/Vertex Layered Terrain");
+			//renderer.material.shader = Shader.Find("MrNothing's Shaders/Vertex Layered Terrain");
 			renderer.material.SetTextureScale ("_Layer1", new Vector2 (planet.lodTilingScale.x * level * level, planet.lodTilingScale.y * level * level));
 		}
 		else 
@@ -108,7 +108,7 @@ public class MeshLodTris : MonoBehaviour {
 				if(level>1)
 				{
 					renderer.material.SetFloat ("_Fading", 0);
-					renderer.material.SetFloat ("_DisableSpec1", 0.25f);
+					renderer.material.SetFloat ("_DisableSpec1", 0.75f);
 					renderer.material.SetFloat ("_Disappear", activationDistance/4);
 					try
 					{

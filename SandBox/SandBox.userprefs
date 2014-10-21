@@ -1,18 +1,19 @@
 ﻿<Properties>
-  <MonoDevelop.Ide.Workspace ActiveConfiguration="Debug" />
-  <MonoDevelop.Ide.Workbench ActiveDocument="Assets\Scripts\MUE Engine\Model\Planet.cs">
+  <MonoDevelop.Ide.Workspace ActiveConfiguration="Debug" PreferredExecutionTarget="MonoDevelop.Default" />
+  <MonoDevelop.Ide.Workbench ActiveDocument="Assets\Assets\Shaders\VertexBlendedTerrain.shader">
     <Files>
-      <File FileName="Assets\Scripts\MUE Engine\Model\Planet.cs" Line="736" Column="9" />
+      <File FileName="Assets\Scripts\MUE Engine\Model\Planet.cs" Line="659" Column="26" />
       <File FileName="Assets\Assets\Shaders\Athmosphere.shader" Line="400" Column="1" />
       <File FileName="Assets\Assets\Shaders\Sea.shader" Line="1" Column="1" />
       <File FileName="Assets\Scripts\Controllers\PlanetCharacterController.cs" Line="1" Column="1" />
-      <File FileName="Assets\Scripts\MUE Engine\Model\Doodad.cs" Line="15" Column="18" />
-      <File FileName="Assets\Assets\Shaders\Clouds.shader" Line="1" Column="1" />
+      <File FileName="Assets\Scripts\MUE Engine\Model\Doodad.cs" Line="12" Column="28" />
       <File FileName="Assets\Assets\Shaders\Grass.shader" Line="1" Column="1" />
       <File FileName="Assets\Standard Assets\Image Effects (Pro Only)\DepthOfField34.js" Line="1" Column="1" />
-      <File FileName="Assets\Scripts\MUE Engine\Model\MeshLodTris.cs" Line="1" Column="1" />
-      <File FileName="Assets\Assets\Shaders\VertexLayeredTerrainNoZ.shader" Line="1" Column="1" />
-      <File FileName="Assets\Assets\Shaders\Tree.shader" Line="251" Column="2" />
+      <File FileName="Assets\Scripts\MUE Engine\Model\MeshLodTris.cs" Line="111" Column="54" />
+      <File FileName="Assets\Assets\Shaders\VertexLayeredTerrainNoZ.shader" Line="21" Column="56" />
+      <File FileName="Assets\Assets\Shaders\Tree.shader" Line="1" Column="1" />
+      <File FileName="Assets\Assets\Shaders\VertexBlendedTerrain.shader" Line="147" Column="38" />
+      <File FileName="Assets\Assets\Shaders\CloudsWithVertexWind.shader" Line="12" Column="49" />
     </Files>
   </MonoDevelop.Ide.Workbench>
   <MonoDevelop.Ide.DebuggingService.Breakpoints>

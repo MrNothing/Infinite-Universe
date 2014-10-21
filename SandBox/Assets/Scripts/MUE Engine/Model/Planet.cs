@@ -78,7 +78,7 @@ public class Planet : MonoBehaviour {
 	// Use this for initialization
 	void Start () 
 	{
-		renderer.material.shader = Shader.Find("MrNothing's Shaders/Vertex Layered Terrain No Z");
+		//renderer.material.shader = Shader.Find("MrNothing's Shaders/Vertex Layered Terrain No Z");
 
 		testcamera = GameObject.FindObjectOfType<PlanetCharacterController> ().mainCamera.camera;
 
@@ -533,71 +533,8 @@ public class Planet : MonoBehaviour {
 			seaVertices[i] = noise.point.normalized*radius+noise.point.normalized*(seaLevel);
 
 			vertices[i] = noise.point;
-			
-			float perlinEffects = 0;
 
-			float range=0.02f;
-			
-			if(method==NoiseMethod.Plains)
-			{
-				
-				for(int k=0; k<perlins.Length; k++)
-				{
-					perlinEffects+=perlins[k].height/totalHeight*noise.noises[k];
-				}
-				
-				if(perlinEffects<minPerlin)
-					minPerlin=perlinEffects;
-				
-				if(perlinEffects>maxPerlin)
-					maxPerlin=perlinEffects;
-				
-				perlinEffects+=0.1f;
-				perlinEffects*=2;
-				
-				range = 0.1f;
-				
-			}
-			else
-			{
-				perlinEffects = noise.noises[0];
-			}
-			
-			
-			
-			float rFact = Planet.rangeFactor(perlinEffects, 0, range);
-			
-			if(perlinEffects>range && perlinEffects<0.1f-range)
-				rFact = 1;
-			
-			float gFact = Planet.rangeFactor(perlinEffects, 0.1f, range);
-			
-			if(perlinEffects>0.1f+range && perlinEffects<0.2f-range)
-				gFact = 1;
-			
-			float bFact = Planet.rangeFactor(perlinEffects, 0.2f, range);
-			
-			if(perlinEffects>0.2f+range && perlinEffects<0.3f-range)
-				bFact = 1;
-			
-			float aFact = Planet.rangeFactor(perlinEffects, 0.3f, range);
-			
-			if(perlinEffects>0.3f+range)
-				aFact = 1;
-			
-			if(bFact<0)
-				bFact = 0;
-			
-			if(aFact<0)
-				aFact = 0;
-			
-			if(rFact<0)
-				rFact = 0;
-
-			if(gFact<0)
-				gFact = 0;
-
-			colors[i] = new Color(rFact, gFact, bFact, aFact);	
+			colors[i] = new Color((((vertices[i].normalized*radius).magnitude)-noise.point.magnitude)/totalHeight+0.5f, 0, 0, 0);	
 			
 			//colors[i] = new Color(noise.noise1*color1+noise.noise2*color2, noise.noise1*color1+noise.noise2*color2, noise.noise1*color1+noise.noise2*color2, 1);	
 		}
@@ -719,7 +656,7 @@ public class Planet : MonoBehaviour {
 			if(gFact<0)
 				gFact = 0;
 
-			colors[i] = new Color(rFact, gFact, bFact, aFact);	
+			colors[i] = new Color((((vertices[i].normalized*radius).magnitude)-noise.point.magnitude)/totalHeight+0.5f, 0, 0, 0);
 			
 			//if(i%2==0 && Planet.rangeFactor(rFact, 0.5f, 0.25f)>0 && script.level==script.maxLevel && details.Length>0 && enableDetails)
 			//	addDetail(origin, i, vertices[i], (int)(Planet.rangeFactor(rFact, 0.5f, 0.25f)*details.Length-1));
@@ -732,7 +669,7 @@ public class Planet : MonoBehaviour {
 					if(doodads[doodadIndex].frequency>Mathf.Abs(Mathf.PerlinNoise((rFact+bFact)*100*(doodadIndex+1), (gFact+aFact)*100*(doodadIndex+1)))*2 && doodads[doodadIndex].frequency<1000 && doodads[doodadIndex].frequency>=0)
 					{
 						addDoodad(origin, i, vertices[i], doodadIndex, doodads[doodadIndex].offsetY);
-						colors[i] += doodads[doodadIndex].vertex;	
+						colors[i].g += doodads[doodadIndex].shadow;	
 						//break;
 					}
 				}
