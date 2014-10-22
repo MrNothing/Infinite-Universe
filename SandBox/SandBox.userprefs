@@ -1,17 +1,30 @@
 ﻿<Properties>
   <MonoDevelop.Ide.Workspace ActiveConfiguration="Debug" />
+<<<<<<< HEAD
   <MonoDevelop.Ide.Workbench ActiveDocument="Assets\Assets\Shaders\Tree.shader">
     <Files>
       <File FileName="Assets\Scripts\MUE Engine\Model\Planet.cs" Line="1238" Column="76" />
       <File FileName="Assets\Assets\Shaders\Athmosphere.shader" Line="23" Column="5" />
+=======
+  <MonoDevelop.Ide.Workbench ActiveDocument="Assets\Assets\Shaders\VertexBlendedTerrain.shader">
+    <Files>
+      <File FileName="Assets\Scripts\MUE Engine\Model\Planet.cs" Line="1" Column="1" />
+      <File FileName="Assets\Assets\Shaders\Athmosphere.shader" Line="358" Column="35" />
+>>>>>>> 74bb35cdc5fb6c72f6eef72eb9d3d9a1ffbd9e34
       <File FileName="Assets\Assets\Shaders\Sea.shader" Line="1" Column="1" />
       <File FileName="Assets\Scripts\Controllers\PlanetCharacterController.cs" Line="1" Column="1" />
       <File FileName="Assets\Scripts\MUE Engine\Model\Doodad.cs" Line="16" Column="19" />
       <File FileName="Assets\Assets\Shaders\Grass.shader" Line="137" Column="16" />
       <File FileName="Assets\Standard Assets\Image Effects (Pro Only)\DepthOfField34.js" Line="1" Column="1" />
+<<<<<<< HEAD
       <File FileName="Assets\Scripts\MUE Engine\Model\MeshLodTris.cs" Line="1" Column="1" />
       <File FileName="Assets\Assets\Shaders\VertexLayeredTerrainNoZ.shader" Line="21" Column="56" />
       <File FileName="Assets\Assets\Shaders\Tree.shader" Line="196" Column="5" />
+=======
+      <File FileName="Assets\Scripts\MUE Engine\Model\MeshLodTris.cs" Line="106" Column="39" />
+      <File FileName="Assets\Assets\Shaders\VertexLayeredTerrainNoZ.shader" Line="12" Column="56" />
+      <File FileName="Assets\Assets\Shaders\Tree.shader" Line="1" Column="1" />
+>>>>>>> 74bb35cdc5fb6c72f6eef72eb9d3d9a1ffbd9e34
       <File FileName="Assets\Assets\Shaders\VertexBlendedTerrain.shader" Line="147" Column="38" />
       <File FileName="Assets\Assets\Shaders\CloudsWithVertexWind.shader" Line="1" Column="1" />
     </Files>
