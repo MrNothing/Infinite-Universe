@@ -1,4 +1,5 @@
 ﻿<Properties>
+<<<<<<< HEAD
   <MonoDevelop.Ide.Workspace ActiveConfiguration="Debug" />
   <MonoDevelop.Ide.Workbench ActiveDocument="Assets\Assets\Shaders\Tree.shader">
     <Files>
@@ -14,6 +15,13 @@
       <File FileName="Assets\Assets\Shaders\Tree.shader" Line="194" Column="37" />
       <File FileName="Assets\Assets\Shaders\VertexBlendedTerrain.shader" Line="147" Column="38" />
       <File FileName="Assets\Assets\Shaders\CloudsWithVertexWind.shader" Line="1" Column="1" />
+=======
+  <MonoDevelop.Ide.Workspace ActiveConfiguration="Debug" PreferredExecutionTarget="MonoDevelop.Default" />
+  <MonoDevelop.Ide.Workbench ActiveDocument="Assets\Assets\Shaders\Tree.shader">
+    <Files>
+      <File FileName="Assets\Assets\Shaders\Tree.shader" Line="11" Column="52" />
+      <File FileName="Assets\Scripts\MUE Engine\Model\Planet.cs" Line="1" Column="1" />
+>>>>>>> 2225fa74f4c2b9b4c4dc1da15d702868091774bb
     </Files>
   </MonoDevelop.Ide.Workbench>
   <MonoDevelop.Ide.DebuggingService.Breakpoints>

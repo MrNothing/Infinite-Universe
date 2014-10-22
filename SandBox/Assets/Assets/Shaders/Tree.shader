@@ -2,16 +2,16 @@ Shader "MrNothing's Shaders/Tree" {
 Properties {
     _Color ("Main Color", Color) = (1,1,1,1)
     _MainTex ("Base (RGB) Trans (A)", 2D) = "white" {}
-    _WindAmplitude("Wind Amplitude", Float) = 1
-    _AmplitudeOffset("Amplitude Offset", Float) = 0.2
+    _WindAmplitude("Wind Amplitude", Float) = 0.1
+    _AmplitudeOffset("Amplitude Offset", Float) = 0
     _WindSpeed("Wind Speed", Float) = 5
     _RotationOffset("Rotation Offset", Float) = 0
     _AmbientShadow("Ambient Shadow", Range(0, 2)) = 1
     _AmbientLight("Ambient Light", Range(0, 1)) = 1
-    _CutoutOffset("Cutout Offset", Range(0, 1)) = 0.05
-    _randomnessOffset("Randomness", Float) = 1
+    _CutoutOffset("Cutout Offset", Range(0, 1)) = 0
+    _randomnessOffset("Randomness", Float) = 0.02
     _LodStart("Lod Distance", Float) = 100
-    _LevelZero("Level Zero", Float) = 3
+    _LevelZero("Level Zero", Float) = 1
 	_LightDir ("Light Direction", Vector) = (0,0,0,0)
 }
  				

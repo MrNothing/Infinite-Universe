@@ -63,6 +63,7 @@
      <Compile Include="Assets\Scripts\Controllers\PlatformCharacterController.cs" />
      <Compile Include="Assets\Scripts\Controllers\WaterController.cs" />
      <Compile Include="Assets\Scripts\GUI\InGame.cs" />
+     <Compile Include="Assets\Scripts\Game\QuitGame.cs" />
      <Compile Include="Assets\Scripts\MUE Engine\Deprecated\IslandsLayer.cs" />
      <Compile Include="Assets\Scripts\MUE Engine\Deprecated\MeshLod.cs" />
      <Compile Include="Assets\Scripts\MUE Engine\Deprecated\PlanetTile.cs" />
