@@ -664,9 +664,9 @@ public class Planet : MonoBehaviour {
 			//place details
 			for(int doodadIndex = 0; doodadIndex<doodads.Length; doodadIndex++)
 			{
-				if((vertices[i].normalized*radius).magnitude+doodads[doodadIndex].minHeight<noise.point.magnitude && (vertices[i].normalized*radius).magnitude+doodads[doodadIndex].maxHeight>noise.point.magnitude)
+				if(noise.point.magnitude>(vertices[i].normalized*radius).magnitude+doodads[doodadIndex].minHeight && noise.point.magnitude<(vertices[i].normalized*radius).magnitude+doodads[doodadIndex].maxHeight)
 				{
-					if(doodads[doodadIndex].frequency>Mathf.Abs(Mathf.PerlinNoise((rFact+bFact)*100*(doodadIndex+1), (gFact+aFact)*100*(doodadIndex+1)))*2 && doodads[doodadIndex].frequency<1000 && doodads[doodadIndex].frequency>=0)
+					if(doodads[doodadIndex].frequency>Mathf.Abs(Mathf.PerlinNoise(vertices[i].x*1000*(doodadIndex+1), vertices[i].y*1000*(doodadIndex+1))*2))
 					{
 						addDoodad(origin, i, vertices[i], doodadIndex, doodads[doodadIndex].offsetY);
 						colors[i].g += doodads[doodadIndex].shadow;	
