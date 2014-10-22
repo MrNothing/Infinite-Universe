@@ -8,7 +8,7 @@ Properties {
     _RotationOffset("Rotation Offset", Float) = 0
     _AmbientShadow("Ambient Shadow", Range(0, 2)) = 1
     _AmbientLight("Ambient Light", Range(0, 1)) = 1
-    _CutoutOffset("Cutout Offset", Range(0, 1)) = 0.05
+    _CutoutOffset("Cutout Offset", Range(0, 1)) = 0
     _randomnessOffset("Randomness", Float) = 0.02
     _LodStart("Lod Distance", Float) = 100
     _LevelZero("Level Zero", Float) = 1
