@@ -41,7 +41,6 @@ public class PerlinConfig
 public class Planet : MonoBehaviour {
 
 	public static int isAvaliable=0;
-	public Material closeTerrainMat;
 
 	//planet parameters
 	public Transform sun;
@@ -98,8 +97,6 @@ public class Planet : MonoBehaviour {
 
 		//Debug.Log (name+": " + transform.TransformPoint (filter.mesh.vertices [0]));
 
-		step = radius*0.0000025f;
-		
 		initVertices = filter.mesh.vertices;
 		//Invoke("perlinPlanet", 1);
 		//Invoke("initClouds", 2);
@@ -110,6 +107,7 @@ public class Planet : MonoBehaviour {
 
 		try
 		{
+			skyDome.GetComponent<AthmosphereScript>().sun = sun;
 			Color skyColor = skyDome.renderer.material.GetColor("_Color");
 			if(skyColor.r+skyColor.g+skyColor.b>=3)
 			{
@@ -138,8 +136,11 @@ public class Planet : MonoBehaviour {
 		try
 		{
 			skyDome.transform.localScale = Vector3.one*(radius+90);
+			skyDome.GetComponent<AthmosphereScript>().sun = sun;
 			clouds.transform.localScale = Vector3.one*(radius+85);	
+			clouds.GetComponent<AthmosphereScript>().sun = sun;
 			sea.transform.localScale = Vector3.one;
+			sea.GetComponent<AthmosphereScript>().sun = sun;
 		}
 		catch
 		{
@@ -243,11 +244,6 @@ public class Planet : MonoBehaviour {
 		
 			
 	}
-	
-	public float range = 10;
-	public float step = Mathf.PI/100f;
-	
-	public PolarPoint debugPoint;
 	
 	public Vector3 getPointFromTangentPlane(Vector3 origin, Vector2 coords)
 	{
@@ -534,7 +530,9 @@ public class Planet : MonoBehaviour {
 
 			vertices[i] = noise.point;
 
-			colors[i] = new Color((((vertices[i].normalized*radius).magnitude)-noise.point.magnitude)/totalHeight+0.5f, 0, 0, 0);	
+			float perlinOffset=perlin.coherentNoise(noise.point.x*1.5f, noise.point.y*1.5f, noise.point.z*1.5f);
+			
+			colors[i] = new Color((((vertices[i].normalized*radius).magnitude)-noise.point.magnitude)/totalHeight+0.5f+perlinOffset/10, 0, 0, 0);	
 			
 			//colors[i] = new Color(noise.noise1*color1+noise.noise2*color2, noise.noise1*color1+noise.noise2*color2, noise.noise1*color1+noise.noise2*color2, 1);	
 		}
@@ -656,8 +654,10 @@ public class Planet : MonoBehaviour {
 			if(gFact<0)
 				gFact = 0;
 
-			colors[i] = new Color((((vertices[i].normalized*radius).magnitude)-noise.point.magnitude)/totalHeight+0.5f, 0, 0, 0);
+			float perlinOffset=perlin.coherentNoise(noise.point.x*1.5f, noise.point.y*1.5f, noise.point.z*1.5f);
 			
+			colors[i] = new Color((((vertices[i].normalized*radius).magnitude)-noise.point.magnitude)/totalHeight+0.5f+perlinOffset/10, 0, 0, 0);	
+
 			//if(i%2==0 && Planet.rangeFactor(rFact, 0.5f, 0.25f)>0 && script.level==script.maxLevel && details.Length>0 && enableDetails)
 			//	addDetail(origin, i, vertices[i], (int)(Planet.rangeFactor(rFact, 0.5f, 0.25f)*details.Length-1));
 
