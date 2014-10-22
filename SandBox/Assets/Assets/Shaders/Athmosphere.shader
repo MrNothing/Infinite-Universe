@@ -42,7 +42,7 @@ Shader "MrNothing's Shaders/Athmosphere" {
 	          float4 pos : SV_POSITION;
 	          fixed4 color : COLOR0;
 	          float2 uv : TEXCOORD0;
-	          float4 vertex;
+	          float4 vertex:COLOR1;
 	          // float4 screenPos;
 	     	};
 	     	

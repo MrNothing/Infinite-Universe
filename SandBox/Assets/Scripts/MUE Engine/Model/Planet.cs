@@ -1230,17 +1230,20 @@ public class Planet : MonoBehaviour {
 		try
 		{
 			float ambientLight = Vector3.Dot((sun.transform.position-transform.position).normalized.normalized, obj.transform.up.normalized);
+			if(ambientLight<0)
+				ambientLight = 0;
 			obj.renderer.materials [0].SetFloat ("_AmbientShadow", ambientLight/2);
-			obj.renderer.materials [0].SetFloat ("_AmbientLight", ambientLight);
+			obj.renderer.materials [0].SetFloat ("_AmbientLight", ambientLight+0.25f);
 			obj.renderer.materials [1].SetVector ("_LightDir", (sun.transform.position-transform.position).normalized);
-			obj.renderer.materials [1].SetFloat ("_AmbientLight", ambientLight);
+			obj.renderer.materials [1].SetFloat ("_AmbientShadow", ambientLight/2);
+			obj.renderer.materials [1].SetFloat ("_AmbientLight", ambientLight+0.25f);
 		}
 		catch
 		{
 
 		}
 
-		obj.transform.RotateAround (obj.transform.position, filter.mesh.normals[vertice].normalized, Random.Range (-180, 180));
+		obj.transform.RotateAround (obj.transform.position, filter.mesh.normals[vertice].normalized, Random.Range (-doodads[detail].maxRotation, doodads[detail].maxRotation));
 
 		//obj.transform.Translate (obj.transform.up*0.40f);
 

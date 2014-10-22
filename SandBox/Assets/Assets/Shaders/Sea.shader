@@ -180,7 +180,7 @@
 		
 		Pass{
 			Tags {"Queue" = "Transparent"} 
-			 ZWrite Off // don't write to depth buffer 
+			 ZWrite On // don't write to depth buffer 
             // in order not to occlude other objects
 			Blend SrcAlpha OneMinusSrcAlpha 
             // blend based on the fragment's alpha value
