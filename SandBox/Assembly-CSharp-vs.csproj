@@ -51,7 +51,6 @@
      <Compile Include="Assets\Assets\Skydome\Sun.cs" />
      <Compile Include="Assets\Assets\Skydome\skydomeScript2.cs" />
      <Compile Include="Assets\Assets\_DLNK\DLNK DemoScenes\Condor Spaceship\UI\Lights.cs" />
-     <Compile Include="Assets\FishIA.cs" />
      <Compile Include="Assets\Rotate.cs" />
      <Compile Include="Assets\Scripts\Camera\LookAtCamera.cs" />
      <Compile Include="Assets\Scripts\Camera\PlanetCamera.cs" />
@@ -64,6 +63,7 @@
      <Compile Include="Assets\Scripts\Controllers\PlatformCharacterController.cs" />
      <Compile Include="Assets\Scripts\Controllers\WaterController.cs" />
      <Compile Include="Assets\Scripts\GUI\InGame.cs" />
+     <Compile Include="Assets\Scripts\Game\FishSpawn.cs" />
      <Compile Include="Assets\Scripts\Game\QuitGame.cs" />
      <Compile Include="Assets\Scripts\MUE Engine\Deprecated\IslandsLayer.cs" />
      <Compile Include="Assets\Scripts\MUE Engine\Deprecated\MeshLod.cs" />
@@ -193,7 +193,7 @@
      <None Include="Assets\Standard Assets\Image Effects (Pro Only)\_Sources\Shaders\_BloomAndFlares\BlurAndFlares.shader" />
      <None Include="Assets\Standard Assets\Image Effects (Pro Only)\_Sources\Shaders\_BloomAndFlares\BlendForBloom.shader" />
  <Reference Include="Assembly-UnityScript-firstpass">
- <HintPath>C:/Users/Dimitri/Documents/Projet Annuel/Infinite-Universe/SandBox/Library/ScriptAssemblies/Assembly-UnityScript-firstpass.dll</HintPath>
+ <HintPath>C:/Users/Dimitri/Documents/GitHub/Infinite-Universe/SandBox/Library/ScriptAssemblies/Assembly-UnityScript-firstpass.dll</HintPath>
  </Reference>
   </ItemGroup>
   <ItemGroup>

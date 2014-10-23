@@ -1,9 +1,9 @@
 ﻿<Properties>
   <MonoDevelop.Ide.Workspace ActiveConfiguration="Debug" PreferredExecutionTarget="MonoDevelop.Default" />
-  <MonoDevelop.Ide.Workbench ActiveDocument="Assets\FishIA.cs">
+  <MonoDevelop.Ide.Workbench ActiveDocument="Assets\Scripts\Game\FishSpawn.cs">
     <Files>
-      <File FileName="Assets\FishIA.cs" Line="24" Column="78" />
-      <File FileName="Assets\Standard Assets\Image Effects (Pro Only)\PostEffectsBase.js" Line="112" Column="1" />
+      <File FileName="Assets\Standard Assets\Image Effects (Pro Only)\PostEffectsBase.js" Line="1" Column="1" />
+      <File FileName="Assets\Scripts\Game\FishSpawn.cs" Line="30" Column="2" />
     </Files>
   </MonoDevelop.Ide.Workbench>
   <MonoDevelop.Ide.DebuggingService.Breakpoints>
