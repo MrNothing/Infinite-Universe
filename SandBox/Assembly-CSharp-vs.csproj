@@ -62,8 +62,10 @@
      <Compile Include="Assets\Scripts\Controllers\PlanetCharacterController.cs" />
      <Compile Include="Assets\Scripts\Controllers\PlatformCharacterController.cs" />
      <Compile Include="Assets\Scripts\Controllers\WaterController.cs" />
+     <Compile Include="Assets\Scripts\GUI\DebugOutput.cs" />
      <Compile Include="Assets\Scripts\GUI\InGame.cs" />
      <Compile Include="Assets\Scripts\Game\QuitGame.cs" />
+     <Compile Include="Assets\Scripts\GlobalCore.cs" />
      <Compile Include="Assets\Scripts\MUE Engine\Deprecated\IslandsLayer.cs" />
      <Compile Include="Assets\Scripts\MUE Engine\Deprecated\MeshLod.cs" />
      <Compile Include="Assets\Scripts\MUE Engine\Deprecated\PlanetTile.cs" />
@@ -96,6 +98,7 @@
      <None Include="Assets\Standard Assets\Image Effects (Pro Only)\_Sources\Shaders\SunShaftsComposite.shader" />
      <None Include="Assets\Standard Assets\Image Effects (Pro Only)\_Sources\Shaders\ColorCorrectionCurves.shader" />
      <None Include="Assets\Standard Assets\Image Effects (Pro Only)\_Sources\Shaders\_Antialiasing\NFAA.shader" />
+     <None Include="Assets\Assets\Shaders\VertexBlendedTerrainNoFog.shader" />
      <None Include="Assets\Assets\Shaders\Sea.shader" />
      <None Include="Assets\Assets\Skydome\aScattering2.0.shader" />
      <None Include="Assets\Assets\Shaders\Clouds.shader" />
@@ -187,16 +190,13 @@
      <None Include="Assets\Assets\Shaders\Athmosphere.shader" />
      <None Include="Assets\Standard Assets\Image Effects (Pro Only)\_Sources\Shaders\_Antialiasing\FXAA3Console.shader" />
      <None Include="Assets\Standard Assets\Image Effects (Pro Only)\_Sources\Shaders\EdgeDetectX.shader" />
+     <None Include="Assets\Assets\Shaders\SeaWithFog.shader" />
      <None Include="Assets\Assets\Shaders\MeshBlender.shader" />
      <None Include="Assets\Standard Assets\Image Effects (Pro Only)\_Sources\Shaders\_Antialiasing\FXAAPreset2.shader" />
      <None Include="Assets\Standard Assets\Image Effects (Pro Only)\_Sources\Shaders\_BloomAndFlares\BlurAndFlares.shader" />
      <None Include="Assets\Standard Assets\Image Effects (Pro Only)\_Sources\Shaders\_BloomAndFlares\BlendForBloom.shader" />
  <Reference Include="Assembly-UnityScript-firstpass">
-<<<<<<< HEAD
  <HintPath>C:/Users/Boris/Documents/Projects/Infinite-Universe/SandBox/Library/ScriptAssemblies/Assembly-UnityScript-firstpass.dll</HintPath>
-=======
- <HintPath>C:/Users/Dimitri/Documents/GitHub/Infinite-Universe/SandBox/Library/ScriptAssemblies/Assembly-UnityScript-firstpass.dll</HintPath>
->>>>>>> 2225fa74f4c2b9b4c4dc1da15d702868091774bb
  </Reference>
   </ItemGroup>
   <ItemGroup>

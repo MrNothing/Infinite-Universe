@@ -54,7 +54,7 @@ public class PlanetCharacterController : MonoBehaviour {
 		AdjustToGravity();
 
 		if (autoSlow)
-			realMoveSpeed = moveSpeed * (0.025f + realMoveSpeed);
+			realMoveSpeed = 10+moveSpeed * (realMoveSpeed);
 		else
 			realMoveSpeed = moveSpeed;
 
@@ -129,6 +129,7 @@ public class PlanetCharacterController : MonoBehaviour {
 		Vector3 offset = Vector3.zero;
 
 		PlanetCharacterController.currentPlanet=null;
+		GlobalCore.currentPlanet = null;
 		realMoveSpeed = 1;
 
 		float bestRatio=2;
@@ -182,6 +183,7 @@ public class PlanetCharacterController : MonoBehaviour {
 			if(bestRatio>fogRatio)
 			{
 				PlanetCharacterController.currentPlanet = planets[i];
+				GlobalCore.currentPlanet = planets[i];
 				bestRatio = fogRatio;
 			}
 				//water.transform.position = (transform.position-planets[i].transform.position).normalized*planets[i].radius;
@@ -211,6 +213,10 @@ public class PlanetCharacterController : MonoBehaviour {
 			try
 			{
 				atmosphereColor = PlanetCharacterController.currentPlanet.skyDome.renderer.material.GetColor("_Color");
+				atmosphereColor.a = 1-bestRatio/2;
+				if(atmosphereColor.a<0.5)
+					atmosphereColor.a = 0.5f;
+				PlanetCharacterController.currentPlanet.skyDome.renderer.material.SetColor("_Color", atmosphereColor);
 				atmosphereColor.a = 1;
 			}
 			catch

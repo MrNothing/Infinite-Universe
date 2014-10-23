@@ -1,4 +1,4 @@
-Shader "MrNothing's Shaders/Vertex Blended Terrain" {
+Shader "MrNothing's Shaders/Vertex Blended Terrain No Fog" {
 	Properties {
 		_Blending ("Blending", Range(0.01, 0.1)) = 0.03
 		_Shininess ("Shininess", Range(0.5, 10)) = 0
@@ -41,7 +41,7 @@ Shader "MrNothing's Shaders/Vertex Blended Terrain" {
 		
 		}
 		SubShader {
-	   Fog {Mode Off}
+	   //Fog {Mode Off}
 	   Tags {"RenderType"="Opaque"}
 		    // Render into depth buffer only
 	    //Pass {
@@ -49,7 +49,7 @@ Shader "MrNothing's Shaders/Vertex Blended Terrain" {
 	    //
 		    // Render normally
 	    Pass {
-	        ZWrite On
+	        ZWrite Off
 	       	Blend SrcAlpha OneMinusSrcAlpha
 	      	ColorMask RGB
 			LOD 200
@@ -169,8 +169,8 @@ Shader "MrNothing's Shaders/Vertex Blended Terrain" {
 				o.norm.g =  pow(max(0.0, dot( reflect(-_LightDir, v.normal), viewDirection)), _Shininess);
 				
 				o.norm.r = dot(v.normal, _LightDir);
-				if(o.norm.r<0)
-					o.norm.r=0;
+				if(o.norm.r<0.2)
+					o.norm.r=0.2;
 					
 				//o.atmo = getAtmosphereColor(v.vertex, o.pos);
 					
@@ -234,7 +234,7 @@ Shader "MrNothing's Shaders/Vertex Blended Terrain" {
 					tex2D (_Layer8, i.uv)*rangeFactor(i.color.r, 0.7, 0.8)*(1+specularity*_Layer8Specular+_Layer8Emission)+
 					tex2D (_Layer9, i.uv)*rangeFactor(i.color.r, 0.8, 0.9)*(1+specularity*_Layer9Specular+_Layer9Emission)+
 					tex2D (_Layer10, i.uv)*rangeFactor(i.color.r, 0.9, 1)*(1+specularity*_Layer10Specular+_Layer10Emission)
-					)*i.norm.r/2*(1-i.color.g)/2;
+					)*i.norm.r/2*(1-i.color.g);
 					colo.a = i.norm.a*_GlobalAlpha;
 					
 					//colo = i.atmo*(1-colo.a)+colo*colo.a;

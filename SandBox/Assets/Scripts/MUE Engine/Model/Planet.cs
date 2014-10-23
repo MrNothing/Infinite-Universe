@@ -136,6 +136,9 @@ public class Planet : MonoBehaviour {
 		try
 		{
 			skyDome.transform.localScale = Vector3.one*(radius+90);
+			Color atmosphereColor = skyDome.renderer.material.GetColor("_Color");
+			atmosphereColor.a = 0.5f;
+			skyDome.renderer.material.SetColor("_Color", atmosphereColor);
 			skyDome.GetComponent<AthmosphereScript>().sun = sun;
 			clouds.transform.localScale = Vector3.one*(radius+85);	
 			clouds.GetComponent<AthmosphereScript>().sun = sun;
@@ -226,23 +229,6 @@ public class Planet : MonoBehaviour {
 		{
 			
 		}
-		
-		if(init)
-		{
-			filter = GetComponent<MeshFilter>();
-			initVertices = filter.mesh.vertices;
-			init = false;
-		}
-		
-		if(draw)
-		{
-			//Debug.DrawLine(getPlanetPointFromSpacePoint(test.position)*0.9f, getPlanetPointFromSpacePoint(test.position), Color.red);
-			perlinPlanet();
-			draw = false;
-		}
-		
-		
-			
 	}
 	
 	public Vector3 getPointFromTangentPlane(Vector3 origin, Vector2 coords)
@@ -490,11 +476,11 @@ public class Planet : MonoBehaviour {
 		clouds.mesh.colors = cloudColors;
 		clouds.mesh.RecalculateBounds ();
 		clouds.mesh.RecalculateNormals ();
-		Debug.Log ("Clouds initalized");
 	}
 
-	public void perlinPlanet()
+	public IEnumerator perlinPlanet()
 	{
+		GlobalCore.loadingQueue += filter.mesh.vertices.Length;
 		//Planet.isAvaliable += 1;
 		if(radius<=1)
 			radius = 1;
@@ -535,6 +521,11 @@ public class Planet : MonoBehaviour {
 			colors[i] = new Color((((vertices[i].normalized*radius).magnitude)-noise.point.magnitude)/totalHeight+0.5f+perlinOffset/10, 0, 0, 0);	
 			
 			//colors[i] = new Color(noise.noise1*color1+noise.noise2*color2, noise.noise1*color1+noise.noise2*color2, noise.noise1*color1+noise.noise2*color2, 1);	
+
+			GlobalCore.loadingQueue--;
+
+			if(i%1000==0)
+				yield return new WaitForEndOfFrame();
 		}
 		
 		//perlinDebug = "min: "+minPerlin+" max: "+maxPerlin;
@@ -668,7 +659,7 @@ public class Planet : MonoBehaviour {
 				{
 					if(doodads[doodadIndex].frequency>Mathf.Abs(Mathf.PerlinNoise(vertices[i].x*1000*(doodadIndex+1), vertices[i].y*1000*(doodadIndex+1))*2))
 					{
-						addDoodad(origin, i, vertices[i], doodadIndex, doodads[doodadIndex].offsetY);
+						StartCoroutine(addDoodad(origin, i, vertices[i], doodadIndex, doodads[doodadIndex].offsetY));
 						colors[i].g += doodads[doodadIndex].shadow;	
 						//break;
 					}
@@ -1217,39 +1208,47 @@ public class Planet : MonoBehaviour {
 	
 	public Doodad[] doodads;
 
-	void addDoodad(MeshFilter filter, int vertice, Vector3 verticePos, int detail, float offsetY)
+	IEnumerator addDoodad(MeshFilter filter, int vertice, Vector3 verticePos, int detail, float offsetY)
 	{
+		yield return new WaitForEndOfFrame ();
 		Vector3 point = getFragment (filter.transform.TransformPoint (verticePos)).point;
-
-		GameObject obj = (GameObject)Instantiate(doodads[detail].gameObject, transform.position+point+point.normalized*offsetY, Quaternion.identity);
-		obj.transform.localScale *= Random.Range(doodads[detail].minScaleFactor, doodads[detail].maxScaleFactor); 
-		obj.transform.parent = filter.transform;
-
-		obj.transform.up = filter.mesh.normals[vertice];
 
 		try
 		{
-			float ambientLight = Vector3.Dot((sun.transform.position-transform.position).normalized.normalized, obj.transform.up.normalized);
-			if(ambientLight<0)
-				ambientLight = 0;
-			obj.renderer.materials [0].SetFloat ("_AmbientShadow", ambientLight/2);
-			obj.renderer.materials [0].SetFloat ("_AmbientLight", ambientLight+0.25f);
-			obj.renderer.materials [1].SetVector ("_LightDir", (sun.transform.position-transform.position).normalized);
-			obj.renderer.materials [1].SetFloat ("_AmbientShadow", ambientLight/2);
-			obj.renderer.materials [1].SetFloat ("_AmbientLight", ambientLight+0.25f);
+			GameObject obj = (GameObject)Instantiate(doodads[detail].gameObject, transform.position+point+point.normalized*offsetY, Quaternion.identity);
+			obj.transform.localScale *= Random.Range(doodads[detail].minScaleFactor, doodads[detail].maxScaleFactor); 
+			obj.transform.parent = filter.transform;
+
+			obj.transform.up = filter.mesh.normals[vertice];
+
+			try
+			{
+				float ambientLight = Vector3.Dot((sun.transform.position-transform.position).normalized.normalized, obj.transform.up.normalized);
+				if(ambientLight<0)
+					ambientLight = 0;
+				obj.renderer.materials [0].SetFloat ("_AmbientShadow", ambientLight/2);
+				obj.renderer.materials [0].SetFloat ("_AmbientLight", ambientLight+0.25f);
+				obj.renderer.materials [1].SetVector ("_LightDir", (sun.transform.position-transform.position).normalized);
+				obj.renderer.materials [1].SetFloat ("_AmbientShadow", ambientLight/2);
+				obj.renderer.materials [1].SetFloat ("_AmbientLight", ambientLight+0.25f);
+			}
+			catch
+			{
+
+			}
+
+			obj.transform.RotateAround (obj.transform.position, filter.mesh.normals[vertice].normalized, Random.Range (-doodads[detail].maxRotation, doodads[detail].maxRotation));
+
+			//obj.transform.Translate (obj.transform.up*0.40f);
+
+			//obj.transform.localEulerAngles += new Vector3 (0, Random.Range (-180, 180), 0);
+
+			obj.name = "Doodad_"+detail+"";
 		}
 		catch
 		{
-
+			Debug.Log("Doodad failed: "+detail);		
 		}
-
-		obj.transform.RotateAround (obj.transform.position, filter.mesh.normals[vertice].normalized, Random.Range (-doodads[detail].maxRotation, doodads[detail].maxRotation));
-
-		//obj.transform.Translate (obj.transform.up*0.40f);
-
-		//obj.transform.localEulerAngles += new Vector3 (0, Random.Range (-180, 180), 0);
-
-		obj.name = "Doodad_"+detail+"";
 	}
 
 	public Color getAtmosphereColor(Vector3 pos)

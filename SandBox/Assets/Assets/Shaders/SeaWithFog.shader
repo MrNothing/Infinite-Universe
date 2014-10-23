@@ -1,4 +1,4 @@
-﻿Shader "MrNothing's Shaders/Sea" {
+﻿Shader "MrNothing's Shaders/Sea With Fog" {
 	Properties {
 		_Layer1 ("Water", 2D) = "white" {}
 		_Foam ("Foam", 2D) = "white" {}
@@ -17,7 +17,7 @@
 	}
 	
 	SubShader {
-			Fog {Mode Off}
+			//Fog {Mode Off}
 			Pass{
 			Cull Front
 			Tags {"Queue" = "Geometry"} 
@@ -171,7 +171,7 @@
 				_Tint+=cloudColor.a*(_FoamIntensity+i.norm.g*foamVal);
 				_Tint.rgb*=i.norm.r+i.norm.g*foamTex.r*2*_SunColor;
 				_Tint.a *= (i.norm.b*i.norm.b+i.norm.g)*_GlobalAlpha*i.norm.a;
-				_Tint.rgb*=i.norm.r;
+				noiseTex.rgb*=2;
 				return _Tint;
 			}
 			
@@ -332,7 +332,7 @@
 				_Tint+=cloudColor.a*(_FoamIntensity+i.norm.g*foamVal);
 				_Tint.rgb*=i.norm.r+i.norm.g*foamTex.r*2*_SunColor;
 				_Tint.a *= (i.norm.b*i.norm.b+i.norm.g)*_GlobalAlpha*i.norm.a;
-				_Tint.rgb*=i.norm.r;
+				noiseTex.rgb*=2;
 				return _Tint;
 			}
 			

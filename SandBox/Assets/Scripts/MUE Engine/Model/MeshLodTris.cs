@@ -14,6 +14,7 @@ public class MeshLodTris : MonoBehaviour {
 	MeshFilter myFilter; 
 	Hashtable indexedTriangles;
 	Hashtable indexedVertices;
+	[HideInInspector]
 	public Camera mainCamera;
 	public float activationDistance = 2f;
 	public float area = 1f;
@@ -43,8 +44,9 @@ public class MeshLodTris : MonoBehaviour {
 	
 	// Use this for initialization
 	void Start () {
+		GlobalCore.loadingQueue++;
 		myFilter = GetComponent<MeshFilter> ();
-
+		mainCamera = GameObject.FindObjectOfType<PlanetCharacterController> ().mainCamera.camera;
 	}
 
 	void initPlanet()
@@ -57,14 +59,14 @@ public class MeshLodTris : MonoBehaviour {
 			else
 				StartCoroutine (planet.perlinIsland (myFilter, this, true));
 
-			//renderer.material.shader = Shader.Find("MrNothing's Shaders/Vertex Layered Terrain");
+			renderer.material.shader = Shader.Find("MrNothing's Shaders/Vertex Blended Terrain No Fog");
 			renderer.material.SetTextureScale ("_Layer1", new Vector2 (planet.lodTilingScale.x * level * level, planet.lodTilingScale.y * level * level));
 		}
 		else 
 		{
 			//planet.Invoke ("initClouds", 2);
 			if(!planet.isIsland)
-				planet.Invoke ("perlinPlanet", 0.2f);
+				StartCoroutine (planet.perlinPlanet ());
 			else
 				planet.Invoke("perlinIsland", 0.2f);
 		}	
@@ -85,6 +87,14 @@ public class MeshLodTris : MonoBehaviour {
 
 	bool generate = true;
 	bool initalized=false;
+
+	bool meshIndexed = false;
+	public void OnMeshIndexed()
+	{
+		MeshHelper.Subdivide (myFilter.mesh, initSubdivision);
+		meshIndexed = true;
+	}
+
 	void Update () 
 	{
 		if (!initalized) 
@@ -100,11 +110,12 @@ public class MeshLodTris : MonoBehaviour {
 				
 				if (level == 1) 
 				{
-					indexedTriangles = MeshHelper.IndexTriangles (myFilter.mesh, GLOBAL_STEP);
-					MeshHelper.Subdivide (myFilter.mesh, initSubdivision);
+					myFilter.mesh.RecalculateNormals ();
+					StartCoroutine(IndexTriangles (myFilter.mesh, GLOBAL_STEP));
 				}
-				//myFilter.mesh.RecalculateNormals ();
-				
+				else
+					meshIndexed = true;
+
 				if(level>1)
 				{
 					renderer.material.SetFloat ("_Fading", 0);
@@ -122,11 +133,16 @@ public class MeshLodTris : MonoBehaviour {
 				}
 				//else
 				//renderer.material.renderQueue = 2;
-				Invoke("initPlanet", 0.5f);	
-
 				initalized=true;
 			}
 			return;		
+		}
+
+		if(meshIndexed && initalized)
+		{
+			Invoke("initPlanet", 0.5f);
+			GlobalCore.loadingQueue--;
+			meshIndexed = false;
 		}
 
 		if (!isIsland) 
@@ -479,6 +495,8 @@ public class MeshLodTris : MonoBehaviour {
 			}
 			else
 				myWaterRenderer.material = Islands.waterMat;
+
+			myWaterRenderer.material.shader = Shader.Find("MrNothing's Shaders/Sea With Fog");
 				
 			water.transform.position = transform.position;
 			water.transform.rotation = transform.rotation;
@@ -621,4 +639,50 @@ public class MeshLodTris : MonoBehaviour {
         }
  
     }
+
+	IEnumerator IndexTriangles(Mesh mesh, float step)
+	{
+		GlobalCore.loadingQueue += mesh.triangles.Length/3;
+		
+		Hashtable doubleChecker = new Hashtable ();
+		Hashtable indexedTris = new Hashtable ();
+		for (int triangle=0; triangle<mesh.triangles.Length/3; triangle++) 
+		{
+			Vector3 t1_pos = mesh.vertices[mesh.triangles[0 + 3 * triangle]];
+			Vector3 t2_pos = mesh.vertices[mesh.triangles[1 + 3 * triangle]];
+			Vector3 t3_pos = mesh.vertices[mesh.triangles[2 + 3 * triangle]];
+			
+			Vector3 barycenter = (t1_pos+t2_pos+t3_pos)/3;
+			
+			if(doubleChecker[barycenter.ToString()]==null)
+			{
+				string tris_id = MeshHelper.flatten(barycenter, step).ToString();
+				
+				List<int> trisInBloc;
+				if(indexedTris[tris_id]==null)
+				{
+					trisInBloc = new List<int>();
+					trisInBloc.Add(triangle);
+					indexedTris.Add(tris_id, trisInBloc);
+				}
+				else
+				{
+					trisInBloc = (List<int>) indexedTris[tris_id];
+					trisInBloc.Add(triangle);
+					indexedTris[tris_id] = trisInBloc;
+				}
+				
+				//doubleChecker.Add(barycenter.ToString(), true);
+			}
+
+			GlobalCore.loadingQueue--;
+
+			if(triangle%20==0)
+				yield return new WaitForEndOfFrame();
+		}
+		
+		indexedTriangles = indexedTris;
+		OnMeshIndexed ();
+	}
+
 }

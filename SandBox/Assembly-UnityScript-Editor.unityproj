@@ -70,6 +70,7 @@
      <None Include="Assets\Standard Assets\Image Effects (Pro Only)\_Sources\Shaders\SunShaftsComposite.shader" />
      <None Include="Assets\Standard Assets\Image Effects (Pro Only)\_Sources\Shaders\ColorCorrectionCurves.shader" />
      <None Include="Assets\Standard Assets\Image Effects (Pro Only)\_Sources\Shaders\_Antialiasing\NFAA.shader" />
+     <None Include="Assets\Assets\Shaders\VertexBlendedTerrainNoFog.shader" />
      <None Include="Assets\Assets\Shaders\Sea.shader" />
      <None Include="Assets\Assets\Skydome\aScattering2.0.shader" />
      <None Include="Assets\Assets\Shaders\Clouds.shader" />
@@ -161,6 +162,7 @@
      <None Include="Assets\Assets\Shaders\Athmosphere.shader" />
      <None Include="Assets\Standard Assets\Image Effects (Pro Only)\_Sources\Shaders\_Antialiasing\FXAA3Console.shader" />
      <None Include="Assets\Standard Assets\Image Effects (Pro Only)\_Sources\Shaders\EdgeDetectX.shader" />
+     <None Include="Assets\Assets\Shaders\SeaWithFog.shader" />
      <None Include="Assets\Assets\Shaders\MeshBlender.shader" />
      <None Include="Assets\Standard Assets\Image Effects (Pro Only)\_Sources\Shaders\_Antialiasing\FXAAPreset2.shader" />
      <None Include="Assets\Standard Assets\Image Effects (Pro Only)\_Sources\Shaders\_BloomAndFlares\BlurAndFlares.shader" />
