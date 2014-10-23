@@ -1,5 +1,6 @@
 ﻿<Properties>
   <MonoDevelop.Ide.Workspace ActiveConfiguration="Debug" />
+<<<<<<< HEAD
   <MonoDevelop.Ide.Workbench ActiveDocument="Assets\Scripts\MUE Engine\Model\SolarSystem.cs">
     <Files>
       <File FileName="Assets\Scripts\MUE Engine\Model\MeshLodTris.cs" Line="499" Column="83" />
@@ -18,6 +19,12 @@
       <File FileName="Assets\Assets\Shaders\VertexBlendedTerrainNoFog.shader" Line="52" Column="11" />
       <File FileName="Assets\Assets\Shaders\Sea.shader" Line="335" Column="25" />
       <File FileName="Assets\Assets\Shaders\SeaWithFog.shader" Line="332" Column="59" />
+=======
+  <MonoDevelop.Ide.Workbench ActiveDocument="Assets\Scripts\Game\FishSpawn.cs">
+    <Files>
+      <File FileName="Assets\Scripts\Game\FishSpawn.cs" Line="51" Column="84" />
+      <File FileName="Assets\Standard Assets\Image Effects (Pro Only)\PostEffectsBase.js" Line="1" Column="1" />
+>>>>>>> origin/master
     </Files>
   </MonoDevelop.Ide.Workbench>
   <MonoDevelop.Ide.DebuggingService.Breakpoints>
