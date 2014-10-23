@@ -62,7 +62,7 @@ public class SpiralArms : MonoBehaviour
                 
 				float ratio = (Vector3.Distance(p1, Camera.main.transform.position)/scale.x-0.5f)*2;
 
-				GL.Color(new Color(ratio, ratio*(1f+Mathf.Abs(Mathf.Sin(x/(scale.x))/2)), ratio*(1f)*(1f+Mathf.Abs(Mathf.Sin(x/(scale.x)))), 1 - t / length));
+				GL.Color(new Color(ratio, ratio*(1f+Mathf.Abs(Mathf.Sin(x/(scale.x))/2)), ratio*(1f)*(1f+Mathf.Abs(Mathf.Sin(x/(scale.x)))), 1 - t / length)*(1-ratio/2));
                 GL.Vertex3(p1.x, p1.y, p1.z);
                 GL.Vertex3(p1.x, p1.y + 0.01f * particleSize, p1.z);
                 GL.Vertex3(p1.x, p1.y, p1.z - 0.01f * particleSize);

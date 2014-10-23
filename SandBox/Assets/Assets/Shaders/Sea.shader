@@ -81,7 +81,8 @@
 				o.uv1 = TRANSFORM_TEX (v.texcoord1, _Foam);
 				//note to myself: always use this to get world coordinates of a vertex.
 				o.norm.r = dot(v.normal, _LightDir);
-				
+				if(o.norm.r<0)
+				o.norm.r = 0;
 				float4x4 modelMatrix = _Object2World;
 				float4x4 modelMatrixInverse = _World2Object; 
 				
@@ -240,6 +241,9 @@
 				o.uv1 = TRANSFORM_TEX (v.texcoord1, _Foam);
 				//note to myself: always use this to get world coordinates of a vertex.
 				o.norm.r = dot(v.normal, _LightDir);
+				
+				if(o.norm.r<0)
+				o.norm.r = 0;
 				
 				float4x4 modelMatrix = _Object2World;
 				float4x4 modelMatrixInverse = _World2Object; 

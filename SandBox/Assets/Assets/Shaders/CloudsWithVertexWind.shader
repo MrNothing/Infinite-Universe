@@ -14,7 +14,7 @@
 	
 	SubShader {
 	
-	  	//Fog {Mode Off}
+	  	Fog {Mode Off}
 		Pass{
 			Tags {"Queue" = "Transparent" "RenderType"="Transparent"} 
 			ZWrite Off // don't write to depth buffer 
@@ -118,6 +118,7 @@
 				fixed4 cloudColor = _Tint*(0.5+cloudTex.r);
 				cloudColor.a = noiseTex.r*(0.5+cloudTex.r/2);
 				cloudColor = cloudColor+i.norm.r*_SunColor*cloudTex.r*(0.5+cloudColor.a/2)*2;
+				cloudColor.rgb *= i.norm.r;
 				cloudColor.a *= i.norm.b*i.norm.a;
 				
 				return cloudColor;
