@@ -44,11 +44,11 @@ public class FishSpawn : MonoBehaviour {
 			{
 			if(Vector3.Distance(this.transform.position, PlanetCharacterController.currentPlanet.transform.position) > altitude)
 			{
-				this.transform.RotateAround(this.transform.position, this.transform.right, 0.5f);
+				this.transform.RotateAround(this.transform.position, this.transform.right, 0.1f);
 			}
 			else
 			{
-				this.transform.RotateAround(this.transform.position, this.transform.right, -0.5f);
+				this.transform.RotateAround(this.transform.position, this.transform.right, -0.1f);
 			}
 			this.transform.RotateAround(this.transform.position, this.transform.up, Random.Range (-0.5f,0.5f));
 			yield return new WaitForSeconds(.1f);
