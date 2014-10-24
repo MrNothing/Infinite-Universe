@@ -1,10 +1,17 @@
 ﻿<Properties>
+<<<<<<< HEAD
   <MonoDevelop.Ide.Workspace ActiveConfiguration="Debug" PreferredExecutionTarget="MonoDevelop.Default" />
   <MonoDevelop.Ide.Workbench ActiveDocument="Assets\Resources\Shaders\VertexBlendedTerrainWithFog.shader">
     <Files>
       <File FileName="Assets\Resources\Shaders\Tree.shader" Line="1" Column="1" />
       <File FileName="Assets\Resources\Shaders\VertexBlendedTerrainWithFog.shader" Line="362" Column="54" />
       <File FileName="Assets\Resources\Shaders\Sea.shader" Line="345" Column="3" />
+=======
+  <MonoDevelop.Ide.Workspace ActiveConfiguration="Debug" />
+  <MonoDevelop.Ide.Workbench ActiveDocument="Assets\NameGenerationScript.cs">
+    <Files>
+      <File FileName="Assets\NameGenerationScript.cs" Line="33" Column="3" />
+>>>>>>> 6fb2b21f16087a447a43d91801a8e5bb5e8dd5b8
     </Files>
   </MonoDevelop.Ide.Workbench>
   <MonoDevelop.Ide.DebuggingService.Breakpoints>
