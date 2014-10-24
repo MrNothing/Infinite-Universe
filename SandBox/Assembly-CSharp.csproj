@@ -50,11 +50,8 @@
      <Compile Include="Assets\Assets\Skydome\Sun.cs" />
      <Compile Include="Assets\Assets\Skydome\skydomeScript2.cs" />
      <Compile Include="Assets\Assets\_DLNK\DLNK DemoScenes\Condor Spaceship\UI\Lights.cs" />
-<<<<<<< HEAD
-     <Compile Include="Assets\Resources\Shaders\AthmosphereScript.cs" />
-=======
      <Compile Include="Assets\NameGenerationScript.cs" />
->>>>>>> 11a161ddea3498b475e93ac1ad702283af62dedb
+     <Compile Include="Assets\Resources\Shaders\AthmosphereScript.cs" />
      <Compile Include="Assets\Rotate.cs" />
      <Compile Include="Assets\Scripts\Camera\LookAtCamera.cs" />
      <Compile Include="Assets\Scripts\Camera\PlanetCamera.cs" />

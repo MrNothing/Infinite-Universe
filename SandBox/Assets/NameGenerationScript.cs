@@ -4,7 +4,7 @@ using System.Collections;
 public class NameGenerationScript : MonoBehaviour {
 	char[] vowels = {'a', 'e', 'y', 'i', 'o', 'u'};
 	char[] consonants = {'z', 'r', 't', 'p', 's', 'd', 'f', 'g', 'h', 'j', 'k', 'l', 'm', 'w', 'x', 'c', 'v', 'b', 'n'};
-	char[] doubleConsonants = {'r', 's', 'h', 'j', 'l', 'm', 'v', 'n'};
+	char[] doubleConsonants = {'r', 's', 'h', 'l', 'm', 'v', 'n'};
 
 	// Use this for initialization
 	void Start () {
@@ -41,8 +41,9 @@ public class NameGenerationScript : MonoBehaviour {
 				string sub2 = name;
 				name = sub1.Substring(0,name.Length-3) + "'" + sub2.Substring(name.Length-3,3);
 			}
-			Debug.Log (seed + " " + name);
-			yield return new WaitForSeconds(0.1f);
+			if(name.Length <=3) name += "'" + BuildSyllable(seed*Random.Range (20,100));
+			Debug.Log (name);
+			yield return null;
 		}
 	}
 
