@@ -101,7 +101,7 @@ public class Planet : MonoBehaviour {
 		//Invoke("perlinPlanet", 1);
 		//Invoke("initClouds", 2);
 
-		perlin = new SimplexNoiseGenerator("azedaz");
+		perlin = new SimplexNoiseGenerator(GlobalCore.seed);
 		
 		lastTestPos =transform.position;
 

@@ -289,12 +289,12 @@
 			{
 				if(i.norm.r<0.2)
 					i.norm.r = 0.2;
-				float ux = i.uv1.x+_Time*_FoamSpeed;
-				float uy = i.uv1.y+_Time*_FoamSpeed;
+				float ux = i.uv1.x*4+_Time*_FoamSpeed;
+				float uy = i.uv1.y*4+_Time*_FoamSpeed;
 				float2 uvC1 = float2(ux, uy);
 				
-				float ux2 = i.uv1.x/2+_Time*_FoamSpeed*0.5;
-				float uy2 = i.uv1.y/2+_Time*_FoamSpeed*0.2;
+				float ux2 = i.uv1.x+_Time*_FoamSpeed*0.5;
+				float uy2 = i.uv1.y+_Time*_FoamSpeed*0.2;
 				
 				float2 uvC2 = float2(ux2, uy2);
 				
@@ -306,7 +306,7 @@
 				fixed4 foamTex = tex2D (_Layer1, uvC1);
 				fixed4 foamTex2 = tex2D (_Layer1, uvC3);
 				
-				foamTex = foamTex*foamTex2*5+0.5;
+				foamTex = noiseTex*foamTex*foamTex2*5+0.5;
 				
 				fixed4 cloudColor = fixed4(1,1,1,1);
 				
@@ -330,9 +330,9 @@
 				}
 				
 				_Tint+=cloudColor.a*(_FoamIntensity+i.norm.g*foamVal);
-				_Tint.rgb*=i.norm.r+i.norm.g*foamTex.r*2*_SunColor;
+				_Tint.rgb*=(foamTex.r)*i.norm.r+i.norm.g*foamTex.r*2*_SunColor;
+				//_Tint.a+=0.25+0.25*foamTex.r*(foamTex.r+foamTex.g+foamTex.b)/15;
 				_Tint.a *= (i.norm.b*i.norm.b+i.norm.g)*_GlobalAlpha*i.norm.a;
-				noiseTex.rgb*=2;
 				return _Tint;
 			}
 			

@@ -1,4 +1,4 @@
-Shader "MrNothing's Shaders/Vertex Blended Terrain No Fog" {
+Shader "MrNothing's Shaders/Vertex Blended Terrain With Fog" {
 	Properties {
 		_Blending ("Blending", Range(0.01, 0.1)) = 0.03
 		_Shininess ("Shininess", Range(0.5, 10)) = 0
@@ -38,6 +38,10 @@ Shader "MrNothing's Shaders/Vertex Blended Terrain No Fog" {
 		_Disappear ("Disappear", Float) = -1
 		_DisableSpec1("Disable Spec", Float) = 0
 		
+		_Water ("Caustic Tex 10", 2D) = "white" {}
+		_CausticIntensity("Caustic Intensity", Float) = 1
+		_AnimationSpeed("Caustic Anim Speed", Float) = 1
+		_WaterLevel("Water Level", Float) = 700
 		
 		}
 		SubShader {
@@ -244,6 +248,123 @@ Shader "MrNothing's Shaders/Vertex Blended Terrain No Fog" {
 			
 			ENDCG
 		}
+		
+		Pass{
+			 ZWrite Off
+	       	Blend SrcAlpha OneMinusSrcAlpha
+	      	ColorMask RGB
+		 
+			CGPROGRAM
+			#pragma vertex vert
+			#pragma fragment frag
+			#include "UnityCG.cginc"
+			
+			//4 layers for 4 color channels...
+			uniform sampler2D _Water;
+			uniform float _AnimationSpeed;
+			uniform float _CausticIntensity;
+			uniform float _WaterLevel;
+			uniform float _GlobalAlpha;
+			uniform float _Fading;
+			uniform float4 _LightDir;
+			
+			struct input
+			{
+				float4 vertex:POSITION;
+				fixed4 color:COLOR0;
+				fixed4 normal:NORMAL;
+				float2 texcoord:TEXCOORD0;
+			};
+			
+			struct v2f 
+			{
+	          float4 pos : SV_POSITION;
+	          fixed4 color : COLOR0;
+	          float2 uv : TEXCOORD0;
+	          fixed4 norm:COLOR1;
+	         // float4 screenPos;
+	     	};
+	     	
+	     	float4 _Water_ST;
+			
+			v2f vert (input v)
+			{
+				v2f o;
+				
+				o.pos = mul(UNITY_MATRIX_MVP, v.vertex);
+				
+				o.color = v.color;
+				o.uv = TRANSFORM_TEX (v.texcoord, _Water);
+				//note to myself: always use this to get world coordinates of a vertex.
+				o.norm.r = dot(v.normal, _LightDir)*_CausticIntensity;
+				
+				if(v.color.r<0.525)
+				{
+					o.norm.r = 0;
+				}
+				
+				float4x4 modelMatrix = _Object2World;
+				float4x4 modelMatrixInverse = _World2Object; 
+				
+				float4 posWorld = mul(modelMatrix, v.vertex);
+				o.norm.g =  0.5;
+				
+				float dist = distance(_WorldSpaceCameraPos, posWorld);
+					
+				o.norm.b = 1;
+				
+				
+				if(_Fading>0)
+				{
+					float ratio2 = dist/_Fading;
+					float ratio3 = dist/_Fading-2;
+					
+					if(ratio3>0)
+					{
+						o.norm.a = ratio3;
+					}
+					else
+					{
+						if(ratio2>=0)
+						{
+							o.norm.a = 2-ratio2*ratio2;
+						}
+						else
+						{
+							o.norm.a = 0;
+						}
+					}
+				}
+				else
+					o.norm.a = 1;
+				
+				return o;
+			}
+			
+			fixed4 frag (v2f i) : COLOR0 
+			{
+				float ux = i.uv.x+_Time*_AnimationSpeed;
+				float uy = i.uv.y+_Time*_AnimationSpeed;
+				float2 uvC1 = float2(ux, uy);
+				
+				float ux2 = i.uv.x/2+_Time*_AnimationSpeed*0.5;
+				float uy2 = i.uv.y/2+_Time*_AnimationSpeed*0.2;
+				
+				float2 uvC2 = float2(ux2, uy2);
+				
+				fixed4 foamTex = tex2D (_Water, uvC1);
+				fixed4 foamTex2 = tex2D (_Water, uvC2);
+				
+				foamTex = foamTex*foamTex2*5+0.5;
+				
+				float4 _Tint=float4(1,1,1,1);
+				_Tint.a*=i.norm.r*(foamTex.r+foamTex.g+foamTex.b-5)/10*i.norm.a;
+				return _Tint;
+			}
+			
+			ENDCG
+		}
+		
 	} 
 	FallBack "Diffuse"
 }

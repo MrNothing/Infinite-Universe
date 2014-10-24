@@ -35,7 +35,11 @@ public class PlanetCharacterController : MonoBehaviour {
 	public Entity player;
 
 	//SunShafts sunShaft;
-	
+	void Awake ()
+	{
+		GlobalCore.mainController = this;
+	}
+
 	void Start () {
 		planets = (Planet[])GameObject.FindObjectsOfType(typeof(Planet));
 		asteroids = (AsteroidField[])GameObject.FindObjectsOfType(typeof(AsteroidField));

@@ -38,6 +38,10 @@ Shader "MrNothing's Shaders/Vertex Blended Terrain" {
 		_Disappear ("Disappear", Float) = -1
 		_DisableSpec1("Disable Spec", Float) = 0
 		
+		_Water ("Caustic Tex 10", 2D) = "white" {}
+		_CausticIntensity("Caustic Intensity", Float) = 0.1
+		_AnimationSpeed("Caustic Anim Speed", Float) = 0.1
+		_WaterLevel("Water Level", Float) = 0
 		
 		}
 		SubShader {
@@ -49,7 +53,7 @@ Shader "MrNothing's Shaders/Vertex Blended Terrain" {
 	    //
 		    // Render normally
 	    Pass {
-	        ZWrite On
+	        ZWrite Off
 	       	Blend SrcAlpha OneMinusSrcAlpha
 	      	ColorMask RGB
 			LOD 200
@@ -169,8 +173,8 @@ Shader "MrNothing's Shaders/Vertex Blended Terrain" {
 				o.norm.g =  pow(max(0.0, dot( reflect(-_LightDir, v.normal), viewDirection)), _Shininess);
 				
 				o.norm.r = dot(v.normal, _LightDir);
-				if(o.norm.r<0)
-					o.norm.r=0;
+				//if(o.norm.r<0.2)
+				//	o.norm.r=0.2;
 					
 				//o.atmo = getAtmosphereColor(v.vertex, o.pos);
 					
@@ -234,7 +238,7 @@ Shader "MrNothing's Shaders/Vertex Blended Terrain" {
 					tex2D (_Layer8, i.uv)*rangeFactor(i.color.r, 0.7, 0.8)*(1+specularity*_Layer8Specular+_Layer8Emission)+
 					tex2D (_Layer9, i.uv)*rangeFactor(i.color.r, 0.8, 0.9)*(1+specularity*_Layer9Specular+_Layer9Emission)+
 					tex2D (_Layer10, i.uv)*rangeFactor(i.color.r, 0.9, 1)*(1+specularity*_Layer10Specular+_Layer10Emission)
-					)*i.norm.r/2*(1-i.color.g)/2;
+					)*i.norm.r/2*(1-i.color.g);
 					colo.a = i.norm.a*_GlobalAlpha;
 					
 					//colo = i.atmo*(1-colo.a)+colo*colo.a;
@@ -244,6 +248,7 @@ Shader "MrNothing's Shaders/Vertex Blended Terrain" {
 			
 			ENDCG
 		}
+		
 	} 
 	FallBack "Diffuse"
 }

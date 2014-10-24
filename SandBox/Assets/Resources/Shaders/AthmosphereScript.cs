@@ -7,6 +7,11 @@ public class AthmosphereScript : MonoBehaviour {
 	public GameObject planet;
 	MeshFilter myFilter;
 	// Use this for initialization
+	void Awake()
+	{
+		sun = GlobalCore.sun;
+	}
+
 	void Start () {
 		myFilter = GetComponent<MeshFilter>();
 	}
@@ -14,7 +19,14 @@ public class AthmosphereScript : MonoBehaviour {
 	// Update is called once per frame
 	void Update () {
 		renderer.material.SetVector("_Sun", (sun.transform.position-transform.position).normalized);
-		planet.renderer.material.SetVector("_LightDir", (sun.transform.position-transform.position).normalized);
+		try
+		{
+			planet.renderer.material.SetVector("_LightDir", (sun.transform.position-transform.position).normalized);
+		}
+		catch
+		{
+				
+		}
 		renderer.material.SetVector("_LightDir", (sun.transform.position-transform.position).normalized);
 		//myFilter.mesh.vertices = planet.mesh.vertices;
 		//myFilter.mesh.RecalculateBounds();

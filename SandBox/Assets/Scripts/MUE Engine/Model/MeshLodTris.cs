@@ -59,7 +59,7 @@ public class MeshLodTris : MonoBehaviour {
 			else
 				StartCoroutine (planet.perlinIsland (myFilter, this, true));
 
-			renderer.material.shader = Shader.Find("MrNothing's Shaders/Vertex Blended Terrain No Fog");
+			renderer.material.shader = Shader.Find("MrNothing's Shaders/Vertex Blended Terrain With Fog");
 			renderer.material.SetTextureScale ("_Layer1", new Vector2 (planet.lodTilingScale.x * level * level, planet.lodTilingScale.y * level * level));
 		}
 		else 

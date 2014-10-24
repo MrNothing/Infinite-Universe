@@ -29,6 +29,7 @@ public class AsteroidField:MonoBehaviour{
 	float distance;
 	void Start()
 	{
+		mainCamera = GlobalCore.mainController.mainCamera.camera;
 		step = (Mathf.PI * 2f) / ((float)amount);
 	}
 	void Update()
@@ -82,7 +83,7 @@ public class AsteroidField:MonoBehaviour{
 				p.scale = perlinScale/(p.height/10);
 				GameObject g = generateAsteroid(p, 2, AsteroidMaterial);
 				g.transform.parent = transform;
-				g.transform.localPosition = new Vector3(Random.Range(-fieldSize, fieldSize), Random.Range(-fieldSize, fieldSize), Random.Range(-fieldSize, fieldSize));
+				g.transform.localPosition = new Vector3(Random.Range(-fieldSize, fieldSize)*transform.localScale.x, Random.Range(-fieldSize, fieldSize)*transform.localScale.x, Random.Range(-fieldSize, fieldSize)*transform.localScale.x);
 				g.transform.Rotate(Random.Range(-180, 180), Random.Range(-180, 180), Random.Range(-180, 180));
 				yield return new WaitForEndOfFrame();
 			}
@@ -99,7 +100,7 @@ public class AsteroidField:MonoBehaviour{
 				p.scale = perlinScale/(p.height/10);
 				GameObject g = generateAsteroid(p, 2, AsteroidMaterial);
 				g.transform.parent = transform;
-				g.transform.localPosition = new Vector3(fieldSize*Mathf.Sin(i)+Random.Range(-fieldSize/10, fieldSize/10), Random.Range(-fieldSize/100, fieldSize/100), fieldSize*Mathf.Cos(i)+Random.Range(-fieldSize/10, fieldSize/10));
+				g.transform.localPosition = new Vector3(fieldSize*Mathf.Sin(i)*transform.localScale.x+Random.Range(-fieldSize/10, fieldSize/10)*transform.localScale.x, Random.Range(-fieldSize/100, fieldSize/100)*transform.localScale.x, fieldSize*Mathf.Cos(i)*transform.localScale.x+Random.Range(-fieldSize/10, fieldSize/10)*transform.localScale.x);
 				g.transform.Rotate(Random.Range(-180, 180), Random.Range(-180, 180), Random.Range(-180, 180));
 			}
 		}

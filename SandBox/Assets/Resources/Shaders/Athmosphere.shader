@@ -118,6 +118,10 @@ Shader "MrNothing's Shaders/Athmosphere" {
 				//horizon*=(1-sunspecularP*2)
 				horizon=0;
 				
+				sunspecular*=2;
+				if(sunspecular<0)
+					sunspecular = 0;
+				
 				fixed4 sunColor = fixed4(sunIntensity*0.5-(1-camRatio2)+horizon, sunIntensity*0.75+sunspecular/2-sunSetFact*(1-camRatio)/2-(1-camRatio2)/4+horizon, sunIntensity+sunspecular-sunSetFact*(1-camRatio)+horizon, camRatio-0.2f-specularCanceler);
 				
 				if(sunColor.r>1)
