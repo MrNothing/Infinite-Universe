@@ -1,30 +1,8 @@
 ﻿<Properties>
-  <MonoDevelop.Ide.Workspace ActiveConfiguration="Debug" />
-<<<<<<< HEAD
-  <MonoDevelop.Ide.Workbench ActiveDocument="Assets\Scripts\MUE Engine\Model\SolarSystem.cs">
+  <MonoDevelop.Ide.Workspace />
+  <MonoDevelop.Ide.Workbench ActiveDocument="Assets\NameGenerationScript.cs">
     <Files>
-      <File FileName="Assets\Scripts\MUE Engine\Model\MeshLodTris.cs" Line="499" Column="83" />
-      <File FileName="Assets\Assets\Shaders\Tree.shader" Line="1" Column="1" />
-      <File FileName="Assets\Assets\Shaders\VertexBlendedTerrain.shader" Line="52" Column="19" />
-      <File FileName="Assets\Assets\Shaders\CloudsWithVertexWind.shader" Line="232" Column="21" />
-      <File FileName="Assets\Scripts\MUE Engine\Model\SolarSystem.cs" Line="47" Column="77" />
-      <File FileName="Assets\Assets\Shaders\VertexColored.shader" Line="1" Column="1" />
-      <File FileName="Assets\Scripts\Tools\MeshHelper.cs" Line="1" Column="1" />
-      <File FileName="Assets\Scripts\GlobalCore.cs" Line="1" Column="1" />
-      <File FileName="Assets\Scripts\GUI\DebugOutput.cs" Line="1" Column="1" />
-      <File FileName="Assets\Assets\Shaders\Athmosphere.shader" Line="17" Column="3" />
-      <File FileName="Assets\Assets\Shaders\AthmosphereScript.cs" Line="1" Column="1" />
-      <File FileName="Assets\Scripts\MUE Engine\Model\Planet.cs" Line="1" Column="1" />
-      <File FileName="Assets\Scripts\Controllers\PlanetCharacterController.cs" Line="1" Column="1" />
-      <File FileName="Assets\Assets\Shaders\VertexBlendedTerrainNoFog.shader" Line="52" Column="11" />
-      <File FileName="Assets\Assets\Shaders\Sea.shader" Line="335" Column="25" />
-      <File FileName="Assets\Assets\Shaders\SeaWithFog.shader" Line="332" Column="59" />
-=======
-  <MonoDevelop.Ide.Workbench ActiveDocument="Assets\Scripts\Game\FishSpawn.cs">
-    <Files>
-      <File FileName="Assets\Scripts\Game\FishSpawn.cs" Line="51" Column="84" />
-      <File FileName="Assets\Standard Assets\Image Effects (Pro Only)\PostEffectsBase.js" Line="1" Column="1" />
->>>>>>> origin/master
+      <File FileName="Assets\NameGenerationScript.cs" Line="30" Column="27" />
     </Files>
   </MonoDevelop.Ide.Workbench>
   <MonoDevelop.Ide.DebuggingService.Breakpoints>

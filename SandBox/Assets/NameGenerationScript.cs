@@ -27,12 +27,20 @@ public class NameGenerationScript : MonoBehaviour {
 				if(i == 2) name += doubleConsonants[(int)(seed*Random.Range (20,100))%doubleConsonants.Length];
 				else name += consonants[(int)(seed*Random.Range (20,100))%consonants.Length];
 			}
-			if((int)(seed*10)%4 == 0) nbSyllables = 2;
-			else if((int)(seed*10)%4 == 1) nbSyllables = 3;
-			else if((int)(seed*10)%4 == 2) nbSyllables = 4;
-			else nbSyllables = 5;
-			for(int i = 1; i < nbSyllables; i++) name += BuildSyllable(seed*(i)*10);
+			if((int)(seed*10)%8 < 2) nbSyllables = 1;
+			else if((int)(seed*10)%8 < 5) nbSyllables = 2;
+			else if((int)(seed*10)%8 < 8) nbSyllables = 3;
+			else nbSyllables = 4;
+			for(int i = 1; i <= nbSyllables; i++){
+				if(i == 4) name += BuildSyllable(seed*(i)*10);
+				else name += BuildSyllable(seed*(i)*10);
+			}
 			name = char.ToUpper(name[0]) + name.Substring(1);
+			if (name.Length >= 9){
+				string sub1 = name;
+				string sub2 = name;
+				name = sub1.Substring(0,name.Length-3) + "'" + sub2.Substring(name.Length-3,3);
+			}
 			Debug.Log (seed + " " + name);
 			yield return new WaitForSeconds(0.1f);
 		}
