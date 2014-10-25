@@ -1,17 +1,24 @@
 ﻿<Properties>
-<<<<<<< HEAD
   <MonoDevelop.Ide.Workspace ActiveConfiguration="Debug" PreferredExecutionTarget="MonoDevelop.Default" />
-  <MonoDevelop.Ide.Workbench ActiveDocument="Assets\Resources\Shaders\VertexBlendedTerrainWithFog.shader">
+  <MonoDevelop.Ide.Workbench ActiveDocument="Assets\Scripts\MUE Engine\Model\Planet.cs">
     <Files>
       <File FileName="Assets\Resources\Shaders\Tree.shader" Line="1" Column="1" />
-      <File FileName="Assets\Resources\Shaders\VertexBlendedTerrainWithFog.shader" Line="362" Column="54" />
-      <File FileName="Assets\Resources\Shaders\Sea.shader" Line="345" Column="3" />
-=======
-  <MonoDevelop.Ide.Workspace ActiveConfiguration="Debug" />
-  <MonoDevelop.Ide.Workbench ActiveDocument="Assets\NameGenerationScript.cs">
-    <Files>
-      <File FileName="Assets\NameGenerationScript.cs" Line="33" Column="3" />
->>>>>>> 6fb2b21f16087a447a43d91801a8e5bb5e8dd5b8
+      <File FileName="Assets\Resources\Shaders\VertexBlendedTerrainWithFog.shader" Line="1" Column="1" />
+      <File FileName="Assets\Resources\Shaders\Sea.shader" Line="1" Column="1" />
+      <File FileName="Assets\Scripts\MUE Engine\Model\Planet.cs" Line="780" Column="3" />
+      <File FileName="Assets\Scripts\GlobalCore.cs" Line="1" Column="1" />
+      <File FileName="Assets\Scripts\MUE Engine\Model\Doodad.cs" Line="1" Column="1" />
+      <File FileName="Assets\Scripts\MUE Engine\Model\MeshLodTris.cs" Line="524" Column="30" />
+      <File FileName="Assets\Resources\Shaders\VertexBlendedTerrain.shader" Line="1" Column="1" />
+      <File FileName="Assets\Resources\Shaders\SeaWithFog.shader" Line="1" Column="1" />
+      <File FileName="Assets\Resources\Shaders\Athmosphere.shader" Line="1" Column="1" />
+      <File FileName="Assets\Scripts\MUE Engine\Model\SpiralArms.cs" Line="1" Column="1" />
+      <File FileName="Assets\Scripts\Controllers\PlanetCharacterController.cs" Line="1" Column="1" />
+      <File FileName="Assets\Scripts\MUE Engine\Model\AsteroidField.cs" Line="1" Column="1" />
+      <File FileName="Assets\Resources\Shaders\AthmosphereScript.cs" Line="1" Column="1" />
+      <File FileName="Assets\Scripts\MUE Engine\Model\SolarSystem.cs" Line="79" Column="8" />
+      <File FileName="Assets\Scripts\MUE Engine\Model\GeneratedLodBlocInfos.cs" Line="37" Column="55" />
+      <File FileName="Assets\Scripts\Tools\SimplexNoise.cs" Line="95" Column="1" />
     </Files>
   </MonoDevelop.Ide.Workbench>
   <MonoDevelop.Ide.DebuggingService.Breakpoints>
