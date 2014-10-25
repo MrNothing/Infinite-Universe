@@ -1,5 +1,6 @@
 ﻿<Properties>
   <MonoDevelop.Ide.Workspace ActiveConfiguration="Debug" PreferredExecutionTarget="MonoDevelop.Default" />
+<<<<<<< HEAD
   <MonoDevelop.Ide.Workbench ActiveDocument="Assets\Scripts\MUE Engine\Model\Planet.cs">
     <Files>
       <File FileName="Assets\Resources\Shaders\Tree.shader" Line="1" Column="1" />
@@ -19,6 +20,11 @@
       <File FileName="Assets\Scripts\MUE Engine\Model\SolarSystem.cs" Line="79" Column="8" />
       <File FileName="Assets\Scripts\MUE Engine\Model\GeneratedLodBlocInfos.cs" Line="37" Column="55" />
       <File FileName="Assets\Scripts\Tools\SimplexNoise.cs" Line="95" Column="1" />
+=======
+  <MonoDevelop.Ide.Workbench ActiveDocument="Assets\NameGenerationScript.cs">
+    <Files>
+      <File FileName="Assets\NameGenerationScript.cs" Line="13" Column="133" />
+>>>>>>> c1850f6d778cee6fedf4be74928c1f32e1cb0283
     </Files>
   </MonoDevelop.Ide.Workbench>
   <MonoDevelop.Ide.DebuggingService.Breakpoints>

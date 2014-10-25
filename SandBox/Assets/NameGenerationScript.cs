@@ -9,8 +9,9 @@ public class NameGenerationScript : MonoBehaviour {
 	public GUIText label;
 
 	char[] vowels = {'a', 'e', 'y', 'i', 'o', 'u', 'a', 'e', 'o'};
-	char[] consonants = {'z', 'r', 't', 'p', 's', 'd', 'f', 'g', 'h', 'j', 'k', 'l', 'm', 'x', 'c', 'v', 'b', 'n', 's', 't', 'r', 'k'};
-	char[] doubleConsonants = {'r', 's', 'h', 'l', 'm', 'n'};
+	char[] doubleVowels = {'a', 'e', 'i', 'o', 'u'};
+	char[] consonants = {'z', 'r', 't', 'p', 's', 'd', 'f', 'g', 'h', 'j', 'k', 'l', 'm', 'x', 'c', 'v', 'b', 'n', 's', 't', 'r', 'k', 'r', 't', 'p', 's'};
+	char[] doubleConsonants = {'r', 's', 'h', 'l', 'n'};
 
 	// Use this for initialization
 	void Start () {
@@ -31,6 +32,7 @@ public class NameGenerationScript : MonoBehaviour {
 		int nbSyllables;
 		string name;
 		int nbConsonants;
+		int secondLetter;
 		name = "";
 		if((int)(seed*100)%5 == 0) nbConsonants = 2;
 		else if((int)(seed*100)%5 <=2) nbConsonants = 1;
@@ -39,8 +41,9 @@ public class NameGenerationScript : MonoBehaviour {
 		{
 			if(i == 2)
 			{
-				if(doubleConsonants[(int)(seed*Random.Range (20,100))%doubleConsonants.Length] != name[0])
-					name += doubleConsonants[(int)(seed*Random.Range (20,100))%doubleConsonants.Length];
+				secondLetter = (int)(seed*Random.Range (20,100))%doubleConsonants.Length;
+				if(doubleConsonants[secondLetter] != name[0])
+					name += doubleConsonants[secondLetter];
 				else i = 1;
 			}
 			else name += consonants[(int)(seed*Random.Range (20,100))%consonants.Length];
@@ -50,8 +53,7 @@ public class NameGenerationScript : MonoBehaviour {
 		else if((int)(seed*10)%8 < 8) nbSyllables = 3;
 		else nbSyllables = 4;
 		for(int i = 1; i <= nbSyllables; i++){
-			if(i == 4) name += BuildSyllable(seed*(i)*10);
-			else name += BuildSyllable(seed*(i)*10);
+			name += BuildSyllable(seed*Random.Range (20,100)*10);
 		}
 		name = char.ToUpper(name[0]) + name.Substring(1);
 		if (name.Length >= 9){
@@ -60,6 +62,13 @@ public class NameGenerationScript : MonoBehaviour {
 			name = sub1.Substring(0,name.Length-3) + "'" + sub2.Substring(name.Length-3,3);
 		}
 		if(name.Length <=3) name += "'" + BuildSyllable(seed*Random.Range (20,100));
+		for(int i = 1; i < name.Length; i++){
+			if (name [i-1] == 'h' && name[i] == 'h'){
+				name = name.Substring(0,i-1) + name.Substring(i, name.Length-i-1);
+			}
+		}
+		if (name [name.Length - 1] == 'r' || name [name.Length - 1] == 'n' || name [name.Length - 1] == 'j' || name [name.Length - 1] == 'l')
+						name = name.Substring (0, name.Length - 1);
 		return name;
 	}
 
@@ -86,7 +95,8 @@ public class NameGenerationScript : MonoBehaviour {
 		}
 		for(int i = 1; i <= nbVowels; i++)
 		{
-			syllable += vowels[(int)(seed*Random.Range(20,100))%vowels.Length];
+			if(i == 2) syllable += doubleVowels[(int)(seed*Random.Range(20,100))%doubleVowels.Length];
+			else syllable += vowels[(int)(seed*Random.Range(20,100))%vowels.Length];
 		}
 		for(int i = 1; i <= nbConsonants; i++)
 		{
