@@ -1,4 +1,5 @@
-﻿using UnityEngine;
+﻿#if UNITY_EDITOR
+using UnityEngine;
 using UnityEditor;
 using System.Collections;
 using System.Collections.Generic;
@@ -248,3 +249,4 @@ public class MrNothingTerrainEditor : Editor {
 		//es.speed = EditorGUILayout.Slider(“Enemy Ship Speed:”, es.speed, 1, 100);
 	}
 }
+#endif
