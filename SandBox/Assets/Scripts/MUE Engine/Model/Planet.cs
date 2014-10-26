@@ -140,7 +140,7 @@ public class Planet : MonoBehaviour {
 			atmosphereColor.a = 0.5f;
 			skyDome.renderer.material.SetColor("_Color", atmosphereColor);
 			skyDome.GetComponent<AthmosphereScript>().sun = sun;
-			clouds.transform.localScale = Vector3.one*(radius+85);	
+			clouds.transform.localScale = Vector3.one*(1.1f);	
 			clouds.GetComponent<AthmosphereScript>().sun = sun;
 			sea.transform.localScale = Vector3.one;
 			sea.GetComponent<AthmosphereScript>().sun = sun;
@@ -151,7 +151,7 @@ public class Planet : MonoBehaviour {
 		}
 
 		filter.mesh.RecalculateNormals ();
-		initClouds();
+		//initClouds();
 	}
 
 	public bool isIsland = false;
@@ -482,6 +482,7 @@ public class Planet : MonoBehaviour {
 	{
 		GlobalCore.loadingQueue += filter.mesh.vertices.Length;
 		//Planet.isAvaliable += 1;
+
 		if(radius<=1)
 			radius = 1;
 		
@@ -491,8 +492,10 @@ public class Planet : MonoBehaviour {
 		Vector3[] seaVertices = new Vector3[filter.mesh.vertices.Length];
 		Color[] colors = new Color[filter.mesh.vertices.Length];
 		Color[] seaColors = new Color[filter.mesh.vertices.Length];
-		
+		Vector3[] cloudVertices = new Vector3[filter.mesh.vertices.Length];
+		Color[] cloudColors = new Color[filter.mesh.vertices.Length];
 		filter.mesh.vertices.CopyTo(vertices, 0);
+		filter.mesh.vertices.CopyTo(cloudVertices, 0);
 		
 		float minPerlin=10;
 		float maxPerlin=0;
@@ -519,6 +522,10 @@ public class Planet : MonoBehaviour {
 			float perlinOffset=perlin.coherentNoise(noise.point.x*1.5f, noise.point.y*1.5f, noise.point.z*1.5f);
 			
 			colors[i] = new Color((((vertices[i].normalized*radius).magnitude)-noise.point.magnitude)/totalHeight+0.5f+perlinOffset/10, 0, 0, 0);	
+
+			float cloudPerlin=perlin.coherentNoise(noise.point.x, noise.point.y, noise.point.z);
+			
+			cloudColors[i] = new Color(cloudPerlin*5, 0, 0, 0);
 			
 			//colors[i] = new Color(noise.noise1*color1+noise.noise2*color2, noise.noise1*color1+noise.noise2*color2, noise.noise1*color1+noise.noise2*color2, 1);	
 
@@ -529,7 +536,12 @@ public class Planet : MonoBehaviour {
 		}
 		
 		//perlinDebug = "min: "+minPerlin+" max: "+maxPerlin;
-		
+
+		clouds.mesh.vertices = cloudVertices;
+		clouds.mesh.colors = cloudColors;
+		clouds.mesh.RecalculateBounds();
+		clouds.mesh.RecalculateNormals();
+
 		filter.mesh.colors = colors;
 		filter.mesh.vertices = vertices;
 		filter.mesh.RecalculateBounds();
@@ -556,19 +568,21 @@ public class Planet : MonoBehaviour {
 			sea.mesh.normals = filter.mesh.normals;
 			sea.mesh.colors = seaColors;
 		}
+
 		initialized = true;
 	}
 	
-	public IEnumerator perlinPlanet(MeshFilter origin, MeshLodTris script, bool enableDetails)
-	{
-		if(radius<=1)
-			radius = 1;
-		
-		float step=0.1f;
-		
+	public IEnumerator perlinPlanet(MeshFilter origin, MeshLodTris script, bool enableDetails, GameObject waterTile, GameObject cloudTile)
+	{	
 		Vector3[] vertices = new Vector3[origin.mesh.vertices.Length];
+		Vector3[] waterVertices = new Vector3[origin.mesh.vertices.Length];
 		Color[] colors = new Color[origin.mesh.vertices.Length];
-		
+		Color[] waterColors = new Color[origin.mesh.vertices.Length];
+
+		float totalHeight = 0;
+		foreach(PerlinConfig p in perlins)
+			totalHeight+=p.height;
+
 		origin.mesh.vertices.CopyTo(vertices, 0);
 
 		float currentTime = Time.time;
@@ -581,74 +595,25 @@ public class Planet : MonoBehaviour {
 			NoiseInfos noise = getFragment(transform.TransformPoint(vertices[i]));
 
 			vertices[i] = noise.point;
-			
-			float perlinEffects = 0;
-			float totalHeight = 0;
-			
-			float range=0.02f;
-			
-			if(method==NoiseMethod.Plains)
-			{
-				foreach(PerlinConfig p in perlins)
-					totalHeight+=p.height;
-				
-				for(int k=0; k<perlins.Length; k++)
-				{
-					perlinEffects+=perlins[k].height/totalHeight*noise.noises[k];
-				}
-				
-				perlinEffects+=0.1f;
-				perlinEffects*=2;
-				
-				range = 0.1f;
-				
-				if(perlinEffects>1)
-					perlinEffects=1;
-				if(perlinEffects<-1)
-					perlinEffects=-1;
-			}
-			else
-			{
-				perlinEffects = noise.noises[0];
-			}
-			
-			
-			float rFact = Planet.rangeFactor(perlinEffects, 0, range);
-			
-			if(perlinEffects>range && perlinEffects<0.1f-range)
-				rFact = 1;
-			
-			float gFact = Planet.rangeFactor(perlinEffects, 0.1f, range);
-			
-			if(perlinEffects>0.1f+range && perlinEffects<0.2f-range)
-				gFact = 1;
-			
-			float bFact = Planet.rangeFactor(perlinEffects, 0.2f, range);
-			
-			if(perlinEffects>0.2f+range && perlinEffects<0.3f-range)
-				bFact = 1;
-			
-			float aFact = Planet.rangeFactor(perlinEffects, 0.3f, range);
-			
-			if(perlinEffects>0.3f+range)
-				aFact = 1;
-			
-			if(bFact<0)
-				bFact = 0;
-			
-			if(aFact<0)
-				aFact = 0;
-			
-			if(rFact<0)
-				rFact = 0;
-
-			if(gFact<0)
-				gFact = 0;
 
 			float perlinOffset=perlin.coherentNoise(noise.point.x*1.5f, noise.point.y*1.5f, noise.point.z*1.5f);
 			
 			colors[i] = new Color((((vertices[i].normalized*radius).magnitude)-noise.point.magnitude)/totalHeight+0.5f+perlinOffset/10, 0, 0, 0);	
 
+			if((vertices[i].normalized*radius).magnitude+seaLevel>noise.point.magnitude)
+			{
+				waterColors[i] = new Color(0, 0, 0, 1-Mathf.Abs(((vertices[i].normalized*radius).magnitude+seaLevel)-noise.point.magnitude)/totalHeight*foam);	
+				
+				if(colors[i].a<0.1f)
+					colors[i].a = 0.1f;
+				
+				waterVertices[i] = noise.point.normalized*radius+noise.point.normalized*(seaLevel);
+			}
+			else
+			{
+				waterColors[i] = new Color(0, 0, 0, 1);	
+				waterVertices[i] = noise.point.normalized*radius+noise.point.normalized*(seaLevel);
+			}
 			//if(i%2==0 && Planet.rangeFactor(rFact, 0.5f, 0.25f)>0 && script.level==script.maxLevel && details.Length>0 && enableDetails)
 			//	addDetail(origin, i, vertices[i], (int)(Planet.rangeFactor(rFact, 0.5f, 0.25f)*details.Length-1));
 
@@ -679,7 +644,13 @@ public class Planet : MonoBehaviour {
 		origin.mesh.vertices = vertices;
 		origin.mesh.RecalculateBounds();
 		origin.mesh.RecalculateNormals();
-		
+
+		MeshFilter waterFilter = waterTile.GetComponent<MeshFilter> ();
+		waterFilter.mesh.colors = waterColors;
+		waterFilter.mesh.vertices = waterVertices;
+		waterFilter.mesh.RecalculateBounds();
+		waterFilter.mesh.RecalculateNormals();
+
 		//if(script.level>1)
 		//{
 			//print("adding mesh collider...");

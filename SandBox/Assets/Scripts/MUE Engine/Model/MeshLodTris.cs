@@ -41,6 +41,7 @@ public class MeshLodTris : MonoBehaviour {
 	
 	MeshMock oldMesh;
 	public GameObject waterTile;
+	public GameObject cloudTile;
 	
 	// Use this for initialization
 	void Start () {
@@ -55,7 +56,7 @@ public class MeshLodTris : MonoBehaviour {
 		if (level > 1) 
 		{
 			if(!planet.isIsland)
-				StartCoroutine (planet.perlinPlanet (myFilter, this, true));
+				StartCoroutine (planet.perlinPlanet (myFilter, this, true, waterTile, cloudTile));
 			else
 				StartCoroutine (planet.perlinIsland (myFilter, this, true));
 
@@ -222,6 +223,24 @@ public class MeshLodTris : MonoBehaviour {
 						Destroy(m.waterTile);
 					}catch
 					{}	
+
+					try
+					{
+						Destroy(m.cloudTile.renderer.GetComponent<MeshFilter>().mesh);
+					}
+					catch
+					{}	
+					try
+					{
+						Destroy(m.cloudTile.renderer.material);
+					}catch
+					{}	
+					try
+					{
+						Destroy(m.cloudTile);
+					}catch
+					{}	
+
 					doublesChecker.Remove(m.triangle);
 					try
 					{
@@ -290,6 +309,23 @@ public class MeshLodTris : MonoBehaviour {
 					try
 					{
 						Destroy(m.waterTile);
+					}catch
+					{}	
+
+					try
+					{
+						Destroy(m.cloudTile.renderer.GetComponent<MeshFilter>().mesh);
+					}
+					catch
+					{}	
+					try
+					{
+						Destroy(m.cloudTile.renderer.material);
+					}catch
+					{}	
+					try
+					{
+						Destroy(m.cloudTile);
 					}catch
 					{}	
 					doublesChecker.Remove(m.triangle);
@@ -504,12 +540,36 @@ public class MeshLodTris : MonoBehaviour {
 			water.name = "WaterLod_" + triangle;
 			water.layer = childsLayer;
 
-			if (!isIsland) 
+			/*if (!isIsland) 
 				StartCoroutine (planet.perlinPlanet (waterMesh, 0));
 			else
-				StartCoroutine (Islands.perlinPlanet (waterMesh, 0));
+				StartCoroutine (Islands.perlinPlanet (waterMesh, 0));*/
 		}
-			
+
+		//clouds
+		GameObject cloud = null;
+		/*cloud = new GameObject ();
+		MeshFilter cloudMesh = cloud.AddComponent<MeshFilter> ();
+		
+		cloudMesh.mesh.vertices = mesh.vertices;
+		cloudMesh.mesh.uv = mesh.uv;
+		cloudMesh.mesh.triangles = mesh.triangles;
+		
+		MeshRenderer myCloudRenderer = cloud.AddComponent<MeshRenderer> ();
+		
+		if (!isIsland) 
+		{
+			myCloudRenderer.material = planet.clouds.renderer.material;
+		}
+
+
+		cloud.transform.position = transform.position;
+		cloud.transform.rotation = transform.rotation;
+		cloud.transform.parent = transform;
+		cloud.name = "CloudLod_" + triangle;
+		cloud.layer = childsLayer;*/
+		
+		//lod	
 		MeshRenderer myRenderer = go.AddComponent<MeshRenderer>();
 		myRenderer.materials = renderer.materials;
 
@@ -538,7 +598,8 @@ public class MeshLodTris : MonoBehaviour {
 
 		lodManager.destroyWhenInvisible = true;
 		lodManager.waterTile = water;
-
+		lodManager.cloudTile = cloud;
+		
 		doublesChecker.Add (triangle, true);
 
 		lod.Add(lodManager);

@@ -151,7 +151,9 @@
 				
 				fixed4 cloudColor = fixed4(1,1,1,1);
 				
-					float foamVal = (foamTex.r+foamTex.g+foamTex.b)/3;
+				float foamVal = (foamTex.r+foamTex.g+foamTex.b)/3;
+				
+				fixed4 initialTint = _Tint;
 				
 				if(i.color.a<1 && i.color.a>_FoamRange)
 				{	
@@ -171,7 +173,7 @@
 				_Tint+=cloudColor.a*(_FoamIntensity+i.norm.g*foamVal);
 				_Tint.rgb*=i.norm.r+i.norm.g*foamTex.r*2*_SunColor;
 				_Tint.a *= (i.norm.b*i.norm.b+i.norm.g)*_GlobalAlpha*i.norm.a;
-				noiseTex.rgb*=2;
+				_Tint*=(foamVal*0.25+0.75)*i.norm.r+i.norm.g*foamVal;
 				return _Tint;
 			}
 			
@@ -319,6 +321,7 @@
 					cloudColor.a = (1-i.color.a)*foamVal*2;
 				}
 				
+				fixed4 initialTint = _Tint;
 				
 				if(i.color.a<_FoamRange)
 				{
@@ -331,8 +334,9 @@
 				
 				_Tint+=cloudColor.a*(_FoamIntensity+i.norm.g*foamVal);
 				_Tint.rgb*=(foamTex.r)*i.norm.r+i.norm.g*foamTex.r*2*_SunColor;
-				//_Tint.a+=0.25+0.25*foamTex.r*(foamTex.r+foamTex.g+foamTex.b)/15;
 				_Tint.a *= (i.norm.b*i.norm.b+i.norm.g)*_GlobalAlpha*i.norm.a;
+				_Tint*=(foamVal*0.25+0.75)*i.norm.r+i.norm.g*foamVal;
+				
 				return _Tint;
 			}
 			

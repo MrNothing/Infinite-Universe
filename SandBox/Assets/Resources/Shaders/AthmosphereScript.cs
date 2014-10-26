@@ -7,15 +7,18 @@ public class AthmosphereScript : MonoBehaviour {
 	public GameObject planet;
 	MeshFilter myFilter;
 	// Use this for initialization
-	void Awake()
-	{
+	void Start () {
 		sun = GlobalCore.sun;
+		myFilter = GetComponent<MeshFilter>();
+
+		if(isDynamic)
+		{
+			renderer.material.SetVector("_SunPos", sun.transform.position);
+			enabled = false;
+		}
 	}
 
-	void Start () {
-		myFilter = GetComponent<MeshFilter>();
-	}
-	
+	public bool isDynamic=false;
 	// Update is called once per frame
 	void Update () {
 		renderer.material.SetVector("_Sun", (sun.transform.position-transform.position).normalized);
