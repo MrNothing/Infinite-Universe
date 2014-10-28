@@ -170,9 +170,9 @@
 				}
 				
 				_Tint+=cloudColor.a*(_FoamIntensity+i.norm.g*foamVal);
-				_Tint.rgb*=i.norm.r+i.norm.g*foamTex.r*2*_SunColor;
-				_Tint.a *= (i.norm.b*i.norm.b+i.norm.g)*_GlobalAlpha*i.norm.a;
-				_Tint*=((foamVal*0.25+0.75)+i.norm.g*foamVal)*i.norm.r;
+				_Tint.rgb*=(foamVal)*i.norm.r+i.norm.g*i.norm.g*foamTex.r*2*_SunColor;
+				_Tint.a *= (i.norm.b*i.norm.b+i.norm.g*i.norm.g)*_GlobalAlpha*i.norm.a*i.norm.r;
+				_Tint*=(1+i.norm.g*foamVal)*i.norm.r;
 				return _Tint;
 			}
 			
@@ -333,9 +333,10 @@
 				}
 				
 				_Tint+=cloudColor.a*(_FoamIntensity+i.norm.g*foamVal);
-				_Tint.rgb*=i.norm.r+i.norm.g*foamTex.r*2*_SunColor;
-				_Tint.a *= (i.norm.b*i.norm.b+i.norm.g)*_GlobalAlpha*i.norm.a;
-				_Tint*=((foamVal*0.25+0.75)+i.norm.g*foamVal)*i.norm.r;
+				_Tint.rgb*=(foamVal)*i.norm.r/2+i.norm.g*i.norm.g*foamTex.r*2*_SunColor/2;
+				_Tint.a=1-i.color.a;
+				_Tint*=(1+i.norm.g*foamVal)*i.norm.r;
+				
 				return _Tint;
 			}
 			

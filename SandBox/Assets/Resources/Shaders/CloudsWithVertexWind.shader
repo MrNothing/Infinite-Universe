@@ -16,7 +16,8 @@
 	
 	  	Fog {Mode Off}
 		Pass{
-			Tags {"Queue" = "Transparent" "RenderType"="Transparent"} 
+			Cull Back
+			Tags {"Queue" = "Transparent+30000" "RenderType"="Transparent"} 
 			ZWrite Off // don't write to depth buffer 
             // in order not to occlude other objects
 			Blend SrcAlpha OneMinusSrcAlpha 
@@ -90,6 +91,7 @@
 				float3 normalDirection = normalize(normalDir);
  
 				float3 viewDirection = normalize(_WorldSpaceCameraPos - posWorld.xyz);
+				o.norm.g =  pow(max(0.0, dot( reflect(-_LightDir, v.normal), viewDirection)), 1.5);
 				
 				float viewIntensity = dot(normalDirection, viewDirection);
 				
@@ -112,14 +114,17 @@
 				i.uv1.x+=_Time*_AnimationSpeed/2;
 				i.uv1.y+=_Time*_AnimationSpeed/2;
 				
-				fixed4 noiseTex = tex2D (_Layer1, i.uv)*i.color.a*2;
-				fixed4 cloudTex = tex2D (_Clouds, i.uv1)*i.color.r*2;
+				fixed4 noiseTex = tex2D (_Layer1, i.uv);
+				fixed4 cloudTex = tex2D (_Clouds, i.uv1);
 				
-				fixed4 cloudColor = _Tint*(0.5+cloudTex.r);
-				cloudColor.a = noiseTex.r*(0.5+cloudTex.r/2);
-				cloudColor = cloudColor+i.norm.r*_SunColor*cloudTex.r*(0.5+cloudColor.a/2)*2;
-				cloudColor.rgb *= i.norm.r;
-				cloudColor.a *= i.norm.b*i.norm.a;
+				noiseTex = noiseTex*cloudTex;
+			
+				float noiseFactor = (noiseTex.r+noiseTex.g+noiseTex.b)/3;
+				
+				fixed4 cloudColor = _Tint;
+				cloudColor = cloudColor+_SunColor*noiseFactor*i.norm.g*i.norm.g*(0.5+i.norm.r/2)*15;
+				cloudColor.rgb *= (i.norm.r*2-1)+i.norm.g*i.norm.a;
+				cloudColor.a *= i.norm.b*i.norm.a+i.norm.g*i.norm.g*10*i.norm.a;
 				
 				return cloudColor;
 			}
@@ -128,6 +133,7 @@
 		}
 		
 		Pass{
+			Cull Front
 			Tags {"Queue" = "Transparent" "RenderType"="Transparent"} 
 			ZWrite Off // don't write to depth buffer 
             // in order not to occlude other objects
@@ -202,6 +208,7 @@
 				float3 normalDirection = normalize(normalDir);
  
 				float3 viewDirection = normalize(_WorldSpaceCameraPos - posWorld.xyz);
+				o.norm.g =  pow(max(0.0, dot( reflect(-_LightDir, v.normal), viewDirection)), 1);
 				
 				float viewIntensity = dot(normalDirection, viewDirection);
 				
@@ -224,14 +231,17 @@
 				i.uv1.x+=_Time*_AnimationSpeed/2;
 				i.uv1.y+=_Time*_AnimationSpeed/2;
 				
-				fixed4 noiseTex = tex2D (_Layer1, i.uv)*i.color.a*2;
-				fixed4 cloudTex = tex2D (_Clouds, i.uv1)*i.color.r*2;
+				fixed4 noiseTex = tex2D (_Layer1, i.uv);
+				fixed4 cloudTex = tex2D (_Clouds, i.uv1);
 				
-				fixed4 cloudColor = _Tint*(0.5+cloudTex.r);
-				cloudColor.a = noiseTex.r*(0.5+cloudTex.r/2);
-				cloudColor = cloudColor+i.norm.r*_SunColor*cloudTex.r*(0.5+cloudColor.a/2)*2;
-				cloudColor.rgb *= i.norm.r;
-				cloudColor.a *= i.norm.b*i.norm.a;
+				noiseTex = noiseTex*cloudTex;
+			
+				float noiseFactor = (noiseTex.r+noiseTex.g+noiseTex.b)/3;
+				
+				fixed4 cloudColor = _Tint;
+				cloudColor = cloudColor+_SunColor*noiseFactor*i.norm.g*i.norm.g*(0.5+i.norm.r/2)*15;
+				cloudColor.rgb *= (i.norm.r*2-1)+i.norm.g*i.norm.a;
+				cloudColor.a *= i.norm.b*i.norm.a+i.norm.g*i.norm.g*10*i.norm.a;
 				
 				return cloudColor;
 			}

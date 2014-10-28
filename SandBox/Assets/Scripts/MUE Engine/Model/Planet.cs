@@ -127,6 +127,7 @@ public class Planet : MonoBehaviour {
 				skyColor.a = 0.35f;
 			}
 			sea.renderer.material.SetColor("_Tint", skyColor);
+			clouds.renderer.material.SetColor("_Tint", skyColor);
 		}
 		catch
 		{
@@ -523,9 +524,10 @@ public class Planet : MonoBehaviour {
 			
 			colors[i] = new Color((((vertices[i].normalized*radius).magnitude)-noise.point.magnitude)/totalHeight+0.5f+perlinOffset/10, 0, 0, 0);	
 
-			float cloudPerlin=perlin.coherentNoise(noise.point.x, noise.point.y, noise.point.z);
+			float cloudPerlin=perlin.coherentNoise(noise.point.x/10, noise.point.y/10, noise.point.z/10);
+			float cloudPerlin2=perlin.coherentNoise(noise.point.x/2, noise.point.y/2, noise.point.z/2);
 			
-			cloudColors[i] = new Color(cloudPerlin*5, 0, 0, 0);
+			cloudColors[i] = new Color(cloudPerlin*5f+cloudPerlin2*2, 0, 0, 0);
 			
 			//colors[i] = new Color(noise.noise1*color1+noise.noise2*color2, noise.noise1*color1+noise.noise2*color2, noise.noise1*color1+noise.noise2*color2, 1);	
 

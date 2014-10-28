@@ -57,25 +57,36 @@ public class SolarSystem : MonoBehaviour {
 
 				float seaLevel = (Mathf.PerlinNoise(randomess*noiseInfos.scale*100+noiseInfos.offset.x, randomess*noiseInfos.scale*100+noiseInfos.offset.y))*25;
 				Color planetAtmoColor = new Color();
-				planetAtmoColor.r = Mathf.Abs (Mathf.PerlinNoise(randomess*noiseInfos.scale*50+noiseInfos.offset.x, randomess*noiseInfos.scale+noiseInfos.offset.y))*2;
-				planetAtmoColor.g = Mathf.Abs (Mathf.PerlinNoise(randomess*noiseInfos.scale*150-noiseInfos.offset.x, randomess*noiseInfos.scale+noiseInfos.offset.y))*2;
+				planetAtmoColor.r = Mathf.Abs (Mathf.PerlinNoise(randomess*noiseInfos.scale*50+noiseInfos.offset.x, randomess*noiseInfos.scale+noiseInfos.offset.y))*1;
+				planetAtmoColor.g = Mathf.Abs (Mathf.PerlinNoise(randomess*noiseInfos.scale*150-noiseInfos.offset.x, randomess*noiseInfos.scale+noiseInfos.offset.y))*1.5f;
 				planetAtmoColor.b = Mathf.Abs (Mathf.PerlinNoise(-randomess*noiseInfos.scale*300+noiseInfos.offset.x, randomess*noiseInfos.scale+noiseInfos.offset.y))*2;
+
+				planetScript.seaLevel = 0;
+				if(planetAtmoColor.grayscale<0.4)
+				{
+					planetScript.hasFog = false;
+					planetScript.skyDome.renderer.enabled = false;
+					planetScript.seaLevel = -50;
+					planetScript.doodads = new Doodad[0];
+				}
+
 				planetScript.skyDome.renderer.material.SetColor("_Color", planetAtmoColor);
 				planetScript.sun = this.transform;
 				planetScript.scale = planetScale;
-				planetScript.seaLevel = 0;
 
 				planetScript.GetComponent<SphereCollider>().radius *= planetScript.scale;
 
 				lodScript.area = 200*planetScript.scale;
 				lodScript.GLOBAL_STEP = 80*planetScript.scale;
 
-				/*if(planetScale>1.5)
+				/*if(planetScale>1.5 && planetScript.hasFog)
 				{
 					GameObject ring = (GameObject)Instantiate(Resources.Load("Planets/Ring", typeof(GameObject)));
+					ring.GetComponent<AsteroidField>().range*=planetScale/2;
 					ring.transform.position = newPlanet.transform.position;
 					ring.transform.parent = newPlanet.transform;
 					ring.transform.localScale *= planetScale/2;
+					ring.transform.LookAt(transform.position);
 				}*/
 
 				currentPlanetCounter++;
