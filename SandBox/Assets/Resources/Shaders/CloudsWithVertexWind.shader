@@ -17,7 +17,7 @@
 	  	Fog {Mode Off}
 		Pass{
 			Cull Back
-			Tags {"Queue" = "Transparent+30000" "RenderType"="Transparent"} 
+			Tags {"Queue" = "Transparent" "RenderType"="Transparent"} 
 			ZWrite Off // don't write to depth buffer 
             // in order not to occlude other objects
 			Blend SrcAlpha OneMinusSrcAlpha 
@@ -121,12 +121,10 @@
 			
 				float noiseFactor = (noiseTex.r+noiseTex.g+noiseTex.b)/3;
 				
-				fixed4 cloudColor = _Tint;
-				cloudColor = cloudColor+_SunColor*noiseFactor*i.norm.g*i.norm.g*(0.5+i.norm.r/2)*15;
-				cloudColor.rgb *= (i.norm.r*2-1)+i.norm.g*i.norm.a;
+				fixed4 cloudColor = _Tint*noiseFactor;
 				cloudColor.a *= i.norm.b*i.norm.a+i.norm.g*i.norm.g*10*i.norm.a;
 				
-				return cloudColor;
+				return 0;
 			}
 			
 			ENDCG
@@ -241,7 +239,7 @@
 				fixed4 cloudColor = _Tint;
 				cloudColor = cloudColor+_SunColor*noiseFactor*i.norm.g*i.norm.g*(0.5+i.norm.r/2)*15;
 				cloudColor.rgb *= (i.norm.r*2-1)+i.norm.g*i.norm.a;
-				cloudColor.a *= i.norm.b*i.norm.a+i.norm.g*i.norm.g*10*i.norm.a;
+				cloudColor.a *= i.norm.b*i.norm.a*i.norm.r+i.norm.g*i.norm.g*10*i.norm.a*i.norm.r;
 				
 				return cloudColor;
 			}

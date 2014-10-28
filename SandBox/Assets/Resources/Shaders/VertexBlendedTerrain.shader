@@ -173,8 +173,7 @@ Shader "MrNothing's Shaders/Vertex Blended Terrain" {
 				o.norm.g =  pow(max(0.0, dot( reflect(-_LightDir, v.normal), viewDirection)), _Shininess);
 				
 				o.norm.r = dot(v.normal, _LightDir);
-				//if(o.norm.r<0.2)
-				//	o.norm.r=0.2;
+				o.norm.r =o.norm.r+0.75;
 					
 				//o.atmo = getAtmosphereColor(v.vertex, o.pos);
 					
