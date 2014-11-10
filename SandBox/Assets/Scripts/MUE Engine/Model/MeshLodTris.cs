@@ -401,7 +401,7 @@ public class MeshLodTris : MonoBehaviour {
 
 		int counter = 0;
 		
-		Debug.Log("hitPoint: "+hitPoint);
+		//Debug.Log("hitPoint: "+hitPoint);
 
 		for (int _x=-tmpRange; _x<=tmpRange; _x++) 
 		{
@@ -497,6 +497,7 @@ public class MeshLodTris : MonoBehaviour {
 		mesh.vertices = new Vector3[] {oldMesh.vertices[oldMesh.triangles[0 + 3 * triangle]], oldMesh.vertices[oldMesh.triangles[1 + 3 * triangle]], oldMesh.vertices[oldMesh.triangles[2 + 3 * triangle]]};
 		mesh.uv = new Vector2[] {oldMesh.uv[oldMesh.triangles[0 + 3 * triangle]], oldMesh.uv[oldMesh.triangles[1 + 3 * triangle]], oldMesh.uv[oldMesh.triangles[2 + 3 * triangle]]};
 		mesh.triangles = new int[] {0, 1, 2};
+		mesh.normals = new Vector3[] {Vector3.zero, Vector3.zero, Vector3.zero};
 		mesh.RecalculateNormals();
 
 		//if(level<maxLevel)
@@ -521,6 +522,7 @@ public class MeshLodTris : MonoBehaviour {
 			waterMesh.mesh.vertices = mesh.vertices;
 			waterMesh.mesh.uv = mesh.uv;
 			waterMesh.mesh.triangles = mesh.triangles;
+			waterMesh.mesh.normals = mesh.normals;
 
 			MeshRenderer myWaterRenderer = water.AddComponent<MeshRenderer> ();
 

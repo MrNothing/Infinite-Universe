@@ -15,9 +15,9 @@
 	SubShader {
 	
 	  	Fog {Mode Off}
+		Tags {"Queue" = "Transparent+10000" "RenderType"="Transparent"} 
 		Pass{
 			Cull Back
-			Tags {"Queue" = "Transparent" "RenderType"="Transparent"} 
 			ZWrite Off // don't write to depth buffer 
             // in order not to occlude other objects
 			Blend SrcAlpha OneMinusSrcAlpha 

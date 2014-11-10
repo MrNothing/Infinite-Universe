@@ -8,8 +8,12 @@ public class SolarSystem : MonoBehaviour {
 	public PerlinConfig noiseInfos;
 	public int avaliablePlanets = 3; 
 	SimplexNoiseGenerator simplex;
+
+	public Texture2D[] textures;
+
 	// Use this for initialization
-	void Start () {
+	void Start () 
+	{
 		GlobalCore.sun = transform;
 		simplex = new SimplexNoiseGenerator (GlobalCore.seed);
 
@@ -29,11 +33,14 @@ public class SolarSystem : MonoBehaviour {
 			
 			bool allow = true;
 
+			if(initialPlanetPosition.magnitude<1200)
+				allow = false;
+
 			foreach(Vector3[] v in planetsPos)
 			{
 				if(Vector3.Distance(v[0], initialPlanetPosition)<v[1].x+700*planetScale*2)
 				{
-					allow = false;
+					allow = false;	
 					break;
 				}
 			}
@@ -89,12 +96,21 @@ public class SolarSystem : MonoBehaviour {
 					ring.transform.LookAt(transform.position);
 				}*/
 
+
+				int texIndex = (int) (Mathf.Abs(simplex.coherentNoise(initialPlanetPosition.x*noiseInfos.scale, initialPlanetPosition.y*noiseInfos.scale, initialPlanetPosition.z*noiseInfos.scale))*10f*((float)textures.Length));
+
+				for (int i=1; i<11; i++)
+				{
+					Texture2D tex = textures[(i+texIndex)%textures.Length];
+					planetScript.renderer.material.SetTexture("_Layer"+i, tex);
+				}
+
 				currentPlanetCounter++;
 				if(currentPlanetCounter>avaliablePlanets)
 					currentPlanetCounter = 0;
 			}
 		}
 
-		GameObject.FindObjectOfType<PlanetCharacterController> ().planets = (Planet[])GameObject.FindObjectsOfType(typeof(Planet));;
+		GameObject.FindObjectOfType<PlanetCharacterController> ().planets = (Planet[])GameObject.FindObjectsOfType(typeof(Planet));
 	}
 }

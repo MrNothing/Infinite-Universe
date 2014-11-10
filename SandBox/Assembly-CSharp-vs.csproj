@@ -72,6 +72,7 @@
      <Compile Include="Assets\Scripts\MUE Engine\Deprecated\MeshLod.cs" />
      <Compile Include="Assets\Scripts\MUE Engine\Deprecated\PlanetTile.cs" />
      <Compile Include="Assets\Scripts\MUE Engine\Model\AsteroidField.cs" />
+     <Compile Include="Assets\Scripts\MUE Engine\Model\CloudsManager.cs" />
      <Compile Include="Assets\Scripts\MUE Engine\Model\Doodad.cs" />
      <Compile Include="Assets\Scripts\MUE Engine\Model\GeneratedLodBlocInfos.cs" />
      <Compile Include="Assets\Scripts\MUE Engine\Model\MeshLodTris.cs" />
@@ -87,7 +88,10 @@
      <Compile Include="Assets\Scripts\SmoothCraft\MeshIndexer.cs" />
      <Compile Include="Assets\Scripts\SmoothCraft\WaterObjects.cs" />
      <Compile Include="Assets\Scripts\SmoothCraft\WorldBloc.cs" />
+     <Compile Include="Assets\Scripts\Tools\MeshCombineUtility.cs" />
      <Compile Include="Assets\Scripts\Tools\MeshHelper.cs" />
+     <Compile Include="Assets\Scripts\Tools\MrNothingOptimizedParticles.cs" />
+     <Compile Include="Assets\Scripts\Tools\MrNothingParticles.cs" />
      <Compile Include="Assets\Scripts\Tools\MrNothingTerrain.cs" />
      <Compile Include="Assets\Scripts\Tools\SimplexNoise.cs" />
      <Compile Include="Assets\Scripts\Tools\SpriteSheet.cs" />
@@ -97,6 +101,7 @@
      <None Include="Assets\Standard Assets\Image Effects (Pro Only)\_Sources\Shaders\_BloomAndFlares\BlendOneOne.shader" />
      <None Include="Assets\Standard Assets\Image Effects (Pro Only)\_Sources\Shaders\NoiseEffectShaderRGB.shader" />
      <None Include="Assets\Standard Assets\Image Effects (Pro Only)\_Sources\Shaders\_DepthOfField\SeparableWeightedBlurDof34.shader" />
+     <None Include="Assets\Resources\Shaders\CloudParticle.shader" />
      <None Include="Assets\Standard Assets\Image Effects (Pro Only)\_Sources\Shaders\ShowAlphaChannel.shader" />
      <None Include="Assets\Standard Assets\Image Effects (Pro Only)\_Sources\Shaders\GlowConeTap.shader" />
      <None Include="Assets\Standard Assets\Image Effects (Pro Only)\_Sources\Shaders\SunShaftsComposite.shader" />
@@ -172,6 +177,7 @@
      <None Include="Assets\Standard Assets\Image Effects (Pro Only)\_Sources\Shaders\TwirlEffect.shader" />
      <None Include="Assets\Standard Assets\Image Effects (Pro Only)\_Sources\Shaders\VortexEffect.shader" />
      <None Include="Assets\Standard Assets\Image Effects (Pro Only)\_Sources\Shaders\Contrast Stretch\Adaptation.shader" />
+     <None Include="Assets\Resources\Shaders\OptimizedParticle.shader" />
      <None Include="Assets\Assets\_DLNK\DLNK Assets\Condor Spaceship\Condor.txt" />
      <None Include="Assets\Standard Assets\Image Effects (Pro Only)\_Sources\Shaders\NoiseAndGrain.shader" />
      <None Include="Assets\Standard Assets\Image Effects (Pro Only)\_Sources\Shaders\VignettingShader.shader" />

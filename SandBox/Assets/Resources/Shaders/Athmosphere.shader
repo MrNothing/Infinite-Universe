@@ -10,7 +10,7 @@ Shader "MrNothing's Shaders/Athmosphere" {
 	}
 	SubShader 
 	{
-		Tags { "Queue"="Transparent" "RenderType"="Transparent" }
+		Tags { "Queue"="Transparent+100000" "RenderType"="Transparent" }
  		
  		LOD 200
 		

@@ -18,9 +18,9 @@
 	
 	SubShader {
 			Fog {Mode Off}
+			Tags {"Queue" = "Geometry"} 
 			Pass{
 			Cull Front
-			Tags {"Queue" = "Geometry"} 
 			 ZWrite On // don't write to depth buffer 
             // in order not to occlude other objects
 			Blend SrcAlpha OneMinusSrcAlpha 

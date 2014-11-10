@@ -1285,4 +1285,9 @@ public class Planet : MonoBehaviour {
 		else
 			return false;
 	}
+
+	public Vector3 getNormalFromPoint(Vector3 point)
+	{
+		return (point-transform.position).normalized;
+	}
 }
